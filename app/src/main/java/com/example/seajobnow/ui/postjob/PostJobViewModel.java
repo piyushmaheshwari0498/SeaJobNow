@@ -1,14 +1,14 @@
-package com.example.seajobnow.ui.gallery;
+package com.example.seajobnow.ui.postjob;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class PostJobViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public PostJobViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }

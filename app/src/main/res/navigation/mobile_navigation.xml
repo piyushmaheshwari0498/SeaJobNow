@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.seajobnow.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_post_job"
+        android:name="com.example.seajobnow.ui.postjob.PostJobFragment"
+        android:label="@string/menu_post_job"
+        tools:layout="@layout/fragment_postjob" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.seajobnow.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_candidates"
+        android:name="com.example.seajobnow.ui.candidate.CandidateFragment"
+        android:label="@string/menu_candidates"
+        tools:layout="@layout/fragment_candidate" />
 </navigation>

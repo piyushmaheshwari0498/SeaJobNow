@@ -5,9 +5,25 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_notification">Notification</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_post_job">Post Jobs</string>
+    <string name="menu_candidates">Candidates</string>
+    <string name="text_post_job">Post Job</string>
+    <string name="text_posted_job_updates">Posted Job Updates</string>
+    <string name="exit_prompt">Please press again to exit</string>
+    <string name="powered_by_interlink_consultant"><b>Powered by </b> Interlink Consultant</string>
+    <string name="emailid">Email Address</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="or">or</string>
+    <string name="still_not_connected_register">New to SeaJobNow? Create an account</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="company_name">Company Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="contact_name">Contact Person Name</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
 </resources>
