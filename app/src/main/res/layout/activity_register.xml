@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:paddingStart="35dp"
             android:text="@string/register"
-            android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -92,6 +91,23 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputspnPosition"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/position"
+                android:visibility="visible">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spnPosition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -107,7 +123,7 @@
                 app:helperText=""
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
-                app:startIconDrawable="@drawable/ic_baseline_email_24">
+                app:startIconDrawable="@drawable/ic_baseline_alternate_email_24">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmailID"
                     android:layout_width="match_parent"
@@ -117,17 +133,6 @@
                     android:textSize="16sp"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="top|center"
-            android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/mobile_layout"
@@ -157,179 +162,149 @@
                     android:textSize="16sp"
                     android:imeOptions="actionNext"/>
             </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="top|center"
-            android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_layout"
+                android:id="@+id/website_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
                 android:layout_marginTop="8dp"
                 android:gravity="start"
-                android:hint="@string/new_password"
-                app:endIconMode="password_toggle"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
-                app:errorTextColor="@color/erorr_red"
-                app:helperText=""
-                app:helperTextEnabled="true"
-                app:hintAnimationEnabled="true"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:inputType="textPassword"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext"/>
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="top|center"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/confirm_password_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center"
-                android:layout_marginTop="8dp"
-                android:gravity="start"
-                android:hint="@string/confirm_password"
-                app:endIconMode="password_toggle"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
-                app:errorTextColor="@color/erorr_red"
-                app:helperText=""
-                app:helperTextEnabled="true"
-                app:hintAnimationEnabled="true"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCpwd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:inputType="textPassword"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/gst_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center"
-                android:layout_marginTop="8dp"
-                android:gravity="start"
-                android:hint="@string/gst_no"
+                android:hint="@string/website"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
-                app:errorTextColor="@color/erorr_red"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline"
+                app:errorTextColor="@color/red_400"
                 app:helperText=""
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
-                app:startIconDrawable="@drawable/ic_info_outline_white_24dp">
+                app:startIconDrawable="@drawable/website_icon">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGstin"
+                    android:id="@+id/etwebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:inputType="textUri"
+                    android:textSize="16sp"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/address_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:hint="@string/company_address"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline"
+                app:errorTextColor="@color/red_400"
+                app:helperText=""
+                app:helperTextEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_location_on_24">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:inputType="textPostalAddress"
+                    android:ems="1"
+                    android:textSize="16sp"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pincode_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:hint="@string/pincode"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline"
+                app:errorTextColor="@color/red_400"
+                app:helperText=""
+                app:helperTextEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_pin_drop_24">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
                     android:inputType="text"
+                    android:ems="1"
+                    android:maxLength="6"
                     android:textSize="16sp"
-                    android:imeOptions="actionDone"/>
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputspnCity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/city_hint"
+                android:textColorHint="@color/black"
+                android:visibility="visible">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spnCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputspnState"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/state_hint"
+                android:textColorHint="@color/black"
+                android:visibility="visible"
+                android:layout_marginTop="10dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spnState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputspnCountry"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/country_hint"
+                android:textColorHint="@color/black"
+                android:visibility="visible"
+                android:layout_marginTop="10dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spnCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="text" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="top|center"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center|left"
-                    android:text="City :"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="24dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvVessel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center|left"
-                    android:text="State :"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spState"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center|left"
-                    android:text="Country :"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spCountry"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-        </LinearLayout>
--->
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button"
             app:cornerRadius="10dp"

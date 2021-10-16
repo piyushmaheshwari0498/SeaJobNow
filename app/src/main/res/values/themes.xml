@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -24,6 +24,12 @@
     <style name="Theme.SeaJobNow.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!--textview styles-->
+    <style name="NormalTextView" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_black</item>
+    </style>
+
     <style name="TitleTextView" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
@@ -33,8 +39,22 @@
     <style name="MediumTextView" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="MediumContent" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/teal_700</item>
         <item name="fontFamily">@font/roboto_black</item>
     </style>
+
+    <style name="ContentTextView" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
     <style name="PaddingMediumTextView" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/black</item>
@@ -48,5 +68,35 @@
         <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:textStyle">bold</item>
         <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="CardBackgroundColor" parent="CardView">
+        <item name="cardBackgroundColor">@color/blue_500</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <style name="CardHeaderBackgroundColor" parent="CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ButtonAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="buttonStyle">@style/MyCustomButton</item>
+    </style>
+    <style name="MyCustomButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="fontFamily">@font/roboto_black</item>
+    </style>
+
+    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 </resources>

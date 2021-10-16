@@ -21,8 +21,7 @@ public class CandidateFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(CandidateViewModel.class);
+        slideshowViewModel = new ViewModelProvider(this).get(CandidateViewModel.class);
 
         binding = FragmentCandidateBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

@@ -19,6 +19,8 @@ import com.example.seajobnow.model.HomePost;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.MyView> {
     // List with String type
     private List<HomePost> list;
@@ -59,10 +61,11 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.MyView
 
         // Set the text of each item of
         // Recycler view with the list items
-        holder.cardView.setBackgroundColor(context.getColor(list.get(position).getColor()));
+//        holder.cardView.setBackgroundColor(context.getColor(list.get(position).getColor()));
         holder.textView.setText(list.get(position).getTittle());
         holder.textViewcount.setText(list.get(position).getCount());
         holder.imageIcon.setImageDrawable(context.getDrawable(list.get(position).getImage()));
+//        holder.cardView.setBackgroundResource(R.drawable.testiamge);
     }
 
 
@@ -91,7 +94,7 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.MyView
             // initialise TextView with id
             textView = (TextView) view.findViewById(R.id.textview);
             textViewcount = (TextView) view.findViewById(R.id.textview_count);
-            imageIcon = (ImageView) view.findViewById(R.id.img_icon);
+            imageIcon = view.findViewById(R.id.img_icon);
             cardView = (CardView) view.findViewById(R.id.cardview);
         }
     }

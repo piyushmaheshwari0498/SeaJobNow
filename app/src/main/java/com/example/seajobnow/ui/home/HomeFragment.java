@@ -1,5 +1,6 @@
 package com.example.seajobnow.ui.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.seajobnow.MainActivity;
 import com.example.seajobnow.R;
 import com.example.seajobnow.actions.ShowSnackbar;
 import com.example.seajobnow.adapters.HomeNewsAdapter;
@@ -21,6 +25,7 @@ import com.example.seajobnow.adapters.HomePostAdapter;
 import com.example.seajobnow.databinding.FragmentHomeBinding;
 import com.example.seajobnow.model.HomeNews;
 import com.example.seajobnow.model.HomePost;
+import com.example.seajobnow.ui.postjob.PostJobFragment;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -30,18 +35,13 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     TextView textView_company_name;
-    MaterialButton button_post_job;
 
-    // Recycler View object
-    RecyclerView recyclerView_post;
-    RecyclerView recyclerView_news;
+    // Layout Manager
+    RecyclerView.LayoutManager RecyclerViewLayoutManager;
 
     // Array list for recycler view data source
     ArrayList<HomePost> source;
     ArrayList<HomeNews> sourceNews;
-
-    // Layout Manager
-    RecyclerView.LayoutManager RecyclerViewLayoutManager;
 
     // adapter class object
     HomePostAdapter adapter;
@@ -50,19 +50,37 @@ public class HomeFragment extends Fragment {
     // Linear Layout Manager
     LinearLayoutManager HorizontalLayout;
 
-    View ChildView;
-    int RecyclerViewItemPosition;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+      //  if (context instanceof MainActivity) {
+            ((MainActivity) getActivity()).setTitle("Home");
+       // }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).setTitle("Home");
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         textView_company_name = binding.textCompanyName;
-        button_post_job = binding.buttonPostJob;
 
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -71,22 +89,23 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        button_post_job.setOnClickListener(new View.OnClickListener() {
+        binding.buttonPostJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                new ShowSnackbar().shortSnackbar(view,"Button Clicked");
-
+                Fragment postFragment = new PostJobFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,postFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
-
-        // initialisation with id's
-        recyclerView_post = binding.rvPost;
-        recyclerView_news = binding.rvNews;
 
         RecyclerViewLayoutManager = new LinearLayoutManager(getContext());
 
         // Set LayoutManager on Recycler View
-        recyclerView_post.setLayoutManager(RecyclerViewLayoutManager);
+        binding.rvPost.setLayoutManager(RecyclerViewLayoutManager);
 
         // Adding items to RecyclerView.
         AddItemsToRecyclerViewArrayList();
@@ -100,16 +119,15 @@ public class HomeFragment extends Fragment {
         // Set Horizontal Layout Manager
         // for Recycler view
         HorizontalLayout = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView_post.setLayoutManager(HorizontalLayout);
+        binding.rvPost.setLayoutManager(HorizontalLayout);
         // Set adapter on recycler view
-        recyclerView_post.setAdapter(adapter);
+        binding.rvPost.setAdapter(adapter);
 
-        recyclerView_news.setLayoutManager(RecyclerViewLayoutManager);
-        recyclerView_news.setAdapter(newsAdapter);
-
-        return root;
+        binding.rvNews.setLayoutManager(RecyclerViewLayoutManager);
+        binding.rvNews.setAdapter(newsAdapter);
     }
 
+    //To avoid memory Leak
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -121,10 +139,10 @@ public class HomeFragment extends Fragment {
     {
         // Adding items to ArrayList
         source = new ArrayList<>();
-        source.add(new HomePost("Scheduled Jobs","50",R.drawable.interview_icon,R.color.blue_500));
-        source.add(new HomePost("Application Sent","70",R.drawable.application_icon,R.color.green_400));
-        source.add(new HomePost("Profile Viewed","50",R.drawable.profile_icon,R.color.red_400));
-        source.add(new HomePost("Unread Message","50",R.drawable.unread_message,R.color.yellow_400));
+        source.add(new HomePost("Interview Scheduled","50",R.drawable.icon_1,R.color.blue_500));
+        source.add(new HomePost("Application Sent","70",R.drawable.icon_2,R.color.green_400));
+        source.add(new HomePost("Profile Viewed","50",R.drawable.icon_3,R.color.red_400));
+        source.add(new HomePost("Unread Message","50",R.drawable.icon_4,R.color.yellow_400));
     }
 
     public void AddNewsItemsToRecyclerViewArrayList()
@@ -136,4 +154,5 @@ public class HomeFragment extends Fragment {
         sourceNews.add(new HomeNews("Either model would provide our reserve pilots with the opportunity to become significant contributors to our daily operations",R.drawable.profile_icon,R.color.red_400));
         sourceNews.add(new HomeNews("Started shedding all RQ-21 aircraft and introduced MQ-9A and VBat Unmanned Aerial Systems for additional experimentation.",R.drawable.unread_message,R.color.yellow_400));
     }
+
 }

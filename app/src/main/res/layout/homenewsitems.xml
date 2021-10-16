@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardview"
+    style="@style/CardHeaderBackgroundColor"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
@@ -13,28 +14,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <!--Text View over Card View-->
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--Text View over Card View-->
 
             <ImageView
                 android:id="@+id/img_icon"
                 android:layout_width="0dp"
-                android:layout_weight="0.1"
                 android:layout_height="40dp"
                 android:layout_gravity="start|center"
+                android:layout_weight="0.1"
                 android:src="@drawable/profile_icon"
                 card_view:tint="@color/blue_500" />
 
             <TextView
-                android:id="@+id/textview"
+                android:id="@+id/textviewTitle"
                 style="@style/PaddingMediumTextView"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
-                />
+                android:layout_weight="1" />
 
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textviewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="10 Oct 2021"
+            android:textColor="@color/grey" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

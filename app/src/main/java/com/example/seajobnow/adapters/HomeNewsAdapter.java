@@ -2,6 +2,7 @@ package com.example.seajobnow.adapters;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +87,7 @@ public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.MyView
             super(view);
 
             // initialise TextView with id
-            textView = (TextView) view.findViewById(R.id.textview);
+            textView = (TextView) view.findViewById(R.id.textviewTitle);
             imageIcon = (ImageView) view.findViewById(R.id.img_icon);
             cardView = (CardView) view.findViewById(R.id.cardview);
         }

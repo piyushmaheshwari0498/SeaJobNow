@@ -16,5 +16,6 @@
             android:id="@+id/nav_candidates"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_candidates" />
+
     </group>
 </menu>
