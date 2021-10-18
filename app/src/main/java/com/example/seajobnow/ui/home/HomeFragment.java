@@ -139,10 +139,10 @@ public class HomeFragment extends Fragment {
     {
         // Adding items to ArrayList
         source = new ArrayList<>();
-        source.add(new HomePost("Interview Scheduled","50",R.drawable.icon_1,R.color.blue_500));
-        source.add(new HomePost("Application Sent","70",R.drawable.icon_2,R.color.green_400));
-        source.add(new HomePost("Profile Viewed","50",R.drawable.icon_3,R.color.red_400));
-        source.add(new HomePost("Unread Message","50",R.drawable.icon_4,R.color.yellow_400));
+        source.add(new HomePost("Interview Scheduled","50 counts",R.drawable.icon_1,R.color.blue_500));
+        source.add(new HomePost("Application Sent","70 counts",R.drawable.icon_2,R.color.green_400));
+        source.add(new HomePost("Profile Viewed","50 counts",R.drawable.icon_3,R.color.red_400));
+        source.add(new HomePost("Unread Message","99+ counts",R.drawable.icon_4,R.color.yellow_400));
     }
 
     public void AddNewsItemsToRecyclerViewArrayList()

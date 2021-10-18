@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -43,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
     AppSharedPreference appSharedPreference;
 
     List<LoginRequest> loginRequestList;
-    String account_status;
 
 
     @Override
@@ -59,6 +59,26 @@ public class LoginActivity extends AppCompatActivity {
 
 
         textfieldBehaviour();
+
+
+        InputFilter toUpperCaseFilter = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+
+                StringBuilder stringBuilder = new StringBuilder();
+
+                for (int i = start; i < end; i++) {
+                    Character character = source.charAt(i);
+                    character = Character.toUpperCase(character); // THIS IS UPPER CASING
+                    stringBuilder.append(character);
+
+                }
+                return stringBuilder.toString();
+            }
+
+        };
+
+        activityLoginBinding.etCompanyCode.setFilters(new InputFilter[] { toUpperCaseFilter });
 
         activityLoginBinding.tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,10 +112,10 @@ public class LoginActivity extends AppCompatActivity {
         String indos = activityLoginBinding.etCompanyCode.getText().toString().trim();
 
         if (indos.isEmpty()) {
-            activityLoginBinding.companyCodeInputLayout.setError("Please Enter Company Code");
+            activityLoginBinding.companyCodeInputLayout.setError(getString(R.string.enter_companycode));
             return false;
         } else {
-            activityLoginBinding.companyCodeInputLayout.setErrorEnabled(false);
+            activityLoginBinding.companyCodeInputLayout.setError(null);
             return true;
         }
 
@@ -104,12 +124,13 @@ public class LoginActivity extends AppCompatActivity {
     public boolean validatePassword() {
         String pass = activityLoginBinding.etPassword.getText().toString().trim();
         if (pass.isEmpty()) {
-            activityLoginBinding.passwordInputLayout.setError("Please Enter Password");
-            return false;
+            activityLoginBinding.passwordInputLayout.setError(getString(R.string.enter_password));
+
         } else {
-            activityLoginBinding.passwordInputLayout.setErrorEnabled(false);
+            activityLoginBinding.passwordInputLayout.setError(null);
             return true;
         }
+        return false;
     }
 
     public void checkIsloggedIn() {
@@ -212,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding.etCompanyCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                activityLoginBinding.companyCodeInputLayout.setError("");
+                activityLoginBinding.companyCodeInputLayout.setError(null);
 
             }
         });
@@ -220,7 +241,7 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding.etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                activityLoginBinding.passwordInputLayout.setError("");
+                activityLoginBinding.passwordInputLayout.setError(null);
 
             }
         });

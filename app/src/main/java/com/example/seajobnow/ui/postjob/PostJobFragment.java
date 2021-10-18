@@ -110,10 +110,10 @@ public class PostJobFragment extends Fragment {
         RecyclerViewLayoutManager = new LinearLayoutManager(getContext());
 
         // Set LayoutManager on Recycler View
-        binding.rvDeliveryAddr.setLayoutManager(RecyclerViewLayoutManager);
+        binding.rvPostedJobs.setLayoutManager(RecyclerViewLayoutManager);
 
         adapter = new PostJobsAdapter(getContext(),source);
-        binding.rvDeliveryAddr.setAdapter(adapter);
+        binding.rvPostedJobs.setAdapter(adapter);
 
 
         return binding.getRoot();
@@ -137,6 +137,19 @@ public class PostJobFragment extends Fragment {
                 refreshItems();
             }
         });
+
+        binding.rvPostedJobs.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && binding.fabNote.getVisibility() == View.VISIBLE) {
+                    binding.fabNote.hide();
+                } else if (dy < 0 && binding.fabNote.getVisibility() != View.VISIBLE) {
+                    binding.fabNote.show();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -201,6 +214,8 @@ public class PostJobFragment extends Fragment {
                 bottomSheetDialog.dismiss();
             }
         });
+
+
     }
 
     public void showDatePicker(){
@@ -314,10 +329,10 @@ public class PostJobFragment extends Fragment {
     {
         // Adding items to ArrayList
         source = new ArrayList<>();
-        source.add(new PostJobs("UI/UX Designer","Enginer","Master","$10000 p/h","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
-        source.add(new PostJobs("Kitchen Jr. Chef","Hotel","Chef","$10000 p/h","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
-        source.add(new PostJobs("Engine","Enginer","Master","$10000 p/h","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
-        source.add(new PostJobs("UI/UX Designer","Enginer","Master","$10000 p/h","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+        source.add(new PostJobs("UI/UX Designer","Enginer","Master","$10000 - $20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+        source.add(new PostJobs("Kitchen Jr. Chef","Hotel","Chef","$10000 - $20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+        source.add(new PostJobs("Engine","Enginer","Master","$10000 - $20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+        source.add(new PostJobs("UI/UX Designer","Enginer","Master","$10000 - $20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
 
     }
 

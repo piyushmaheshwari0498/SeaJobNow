@@ -16,7 +16,7 @@ public class HomeViewModel extends ViewModel {
     public HomeViewModel() {
         appSharedPreference = AppSharedPreference.getAppSharedPreference(new HomeFragment().getContext());
         mText = new MutableLiveData<>();
-        mText.setValue(appSharedPreference.getString(Constants.INTENT_KEYS.KEY_COMPANY_NAME));
+        mText.setValue("Welcome,\n"+ appSharedPreference.getString(Constants.INTENT_KEYS.KEY_COMPANY_NAME));
     }
 
     public LiveData<String> getText() {

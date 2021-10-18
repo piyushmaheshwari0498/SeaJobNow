@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.seajobnow" >
+    package="com.example.seajobnow">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,14 +10,18 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
+        android:configChanges="orientation|screenSize|keyboardHidden"
         android:icon="@drawable/sealogo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/sealogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SeaJobNow"
-        android:configChanges="orientation|screenSize|keyboardHidden">
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.PostDetails_Activity"
+            android:exported="false"
+            android:theme="@style/Theme.SeaJobNow.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
             android:exported="true"
@@ -29,7 +33,7 @@
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/Theme.SeaJobNow.NoActionBar" >
+            android:theme="@style/Theme.SeaJobNow.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

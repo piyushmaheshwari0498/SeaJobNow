@@ -93,7 +93,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.inputspnCity.setError(null);
-            activityRegisterBinding.inputspnCity.setErrorEnabled(false);
             return true;
         }
     }
@@ -104,7 +103,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.inputspnState.setError(null);
-            activityRegisterBinding.inputspnState.setErrorEnabled(false);
             return true;
         }
     }
@@ -115,7 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.inputspnCountry.setError(null);
-            activityRegisterBinding.inputspnCountry.setErrorEnabled(false);
             return true;
         }
     }
@@ -127,7 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.companyNameLayout.setError(null);
-            activityRegisterBinding.companyNameLayout.setErrorEnabled(false);
             return true;
         }
     }
@@ -139,7 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.contactNameLayout.setError(null);
-            activityRegisterBinding.contactNameLayout.setErrorEnabled(false);
             return true;
         }
     }
@@ -151,7 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.addressLayout.setError(null);
-            activityRegisterBinding.addressLayout.setErrorEnabled(false);
             return true;
         }
     }
@@ -163,7 +157,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.pincodeLayout.setError(null);
-            activityRegisterBinding.pincodeLayout.setErrorEnabled(false);
             return true;
         }
     }
@@ -180,7 +173,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.emailLayout.setError(null);
-            activityRegisterBinding.emailLayout.setErrorEnabled(false);
             return true;
         }
     }
@@ -197,7 +189,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.mobileLayout.setError(null);
-            activityRegisterBinding.mobileLayout.setErrorEnabled(false);
             return true;
         }
     }
