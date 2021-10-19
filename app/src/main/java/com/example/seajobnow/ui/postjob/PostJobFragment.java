@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,7 @@ import com.example.seajobnow.model.HomePost;
 import com.example.seajobnow.model.PostJobs;
 import com.example.seajobnow.ui.home.HomeFragment;
 import com.example.seajobnow.utils.InternetConnection;
+import com.example.seajobnow.utils.RecyclerTouchListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
@@ -329,10 +331,10 @@ public class PostJobFragment extends Fragment {
     {
         // Adding items to ArrayList
         source = new ArrayList<>();
-        source.add(new PostJobs("UI/UX Designer","Enginer","Master","$10000 - $20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
-        source.add(new PostJobs("Kitchen Jr. Chef","Hotel","Chef","$10000 - $20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
-        source.add(new PostJobs("Engine","Enginer","Master","$10000 - $20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
-        source.add(new PostJobs("UI/UX Designer","Enginer","Master","$10000 - $20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+        source.add(new PostJobs("UI/UX Designer","Enginer","Master","₹10000 - ₹20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+        source.add(new PostJobs("Kitchen Jr. Chef","Hotel","Chef","₹10000 - ₹20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+        source.add(new PostJobs("Engine","Enginer","Master","₹10000 - ₹20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+        source.add(new PostJobs("UI/UX Designer","Enginer","Master","₹10000 - ₹20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
 
     }
 

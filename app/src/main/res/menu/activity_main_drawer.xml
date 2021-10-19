@@ -3,19 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_post_job"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_post_job" />
-        <item
-            android:id="@+id/nav_candidates"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_candidates" />
+    <item android:title="Main">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_home"
+                    android:icon="@drawable/ic_menu_camera"
+                    android:title="@string/menu_home" />
+            </group>
+        </menu>
+    </item>
 
-    </group>
+    <item android:title="Main">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_post_job"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="@string/menu_post_job" />
+                <item
+                    android:id="@+id/nav_candidates"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="@string/menu_candidates" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Other">
+        <menu>
+            <group
+                android:id="@+id/menu_bottom"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_plans"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="@string/menu_plans" />
+
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_baseline_person_outline"
+                    android:title="@string/menu_proilfe" />
+            </group>
+        </menu>
+    </item>
 </menu>

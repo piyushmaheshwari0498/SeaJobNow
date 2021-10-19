@@ -34,6 +34,12 @@
         android:label="@string/menu_candidates"
         tools:layout="@layout/fragment_candidate" />
 
+    <fragment
+        android:id="@+id/nav_plans"
+        android:name="com.example.seajobnow.ui.plans.MyPlans"
+        android:label="@string/menu_plans"
+        tools:layout="@layout/my_plans_fragment" />
+
     <!--<action
         android:id="@+id/nav_logout"
         android:name="com.example.seajobnow.ui.candidate.CandidateFragment"
