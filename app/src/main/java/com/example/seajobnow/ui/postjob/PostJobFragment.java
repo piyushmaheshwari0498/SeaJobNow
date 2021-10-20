@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
@@ -29,12 +31,33 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.seajobnow.ApiEntity.RetrofitBuilder;
+import com.example.seajobnow.ApiEntity.request.DepartmentRequest;
+import com.example.seajobnow.ApiEntity.request.DesignationRequest;
+import com.example.seajobnow.ApiEntity.request.EmployementTypeRequest;
+import com.example.seajobnow.ApiEntity.request.PostSpinnerDataRequest;
+import com.example.seajobnow.ApiEntity.request.RankRequest;
+import com.example.seajobnow.ApiEntity.request.SalaryRequest;
+import com.example.seajobnow.ApiEntity.request.ShipTypeRequest;
+import com.example.seajobnow.ApiEntity.request.SpinnerDataRequest;
+import com.example.seajobnow.ApiEntity.response.PostSpinnerResponse;
+import com.example.seajobnow.ApiEntity.response.SpinnerResponse;
+import com.example.seajobnow.Apinterface.ApiConnection;
 import com.example.seajobnow.LoginActivity;
 import com.example.seajobnow.MainActivity;
 import com.example.seajobnow.R;
 
+import com.example.seajobnow.RegisterActivity;
+import com.example.seajobnow.actions.ShowSnackbar;
+import com.example.seajobnow.adapters.CityAdapter;
+import com.example.seajobnow.adapters.CountryAdapter;
+import com.example.seajobnow.adapters.DepartmentAdapter;
 import com.example.seajobnow.adapters.HomePostAdapter;
 import com.example.seajobnow.adapters.PostJobsAdapter;
+import com.example.seajobnow.adapters.RankAdapter;
+import com.example.seajobnow.adapters.SalaryAdapter;
+import com.example.seajobnow.adapters.ShipTypeAdapter;
+import com.example.seajobnow.adapters.StateAdapter;
 import com.example.seajobnow.databinding.FragmentPostjobBinding;
 import com.example.seajobnow.model.HomeNews;
 import com.example.seajobnow.model.HomePost;
@@ -50,7 +73,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PostJobFragment extends Fragment {
 
@@ -60,11 +88,28 @@ public class PostJobFragment extends Fragment {
     Calendar calendar;
     int mDay, mMonth, mYear;
 
+    //Spinner Lists
+    List<RankRequest> rankRequestList;
+    List<DepartmentRequest> departmentRequestList;
+    List<EmployementTypeRequest> employementTypeRequestList;
+    List<ShipTypeRequest> shipTypeRequestList;
+    List<SalaryRequest> salaryRequestList;
+
+    //Selected Id & Name
+    String selectedRankId,selectedDepartmentId,selectedShipId,selectedSalaryId,selectedEmployementTypeId;
+    String selectedRankName,selectedDepartmentName,selectedShipName,selectedSalaryName,selectedEmployementTypeMame;
+
+    //Adapters
+    RankAdapter rankAdapter;
+    DepartmentAdapter departmentAdapter;
+    ShipTypeAdapter shipTypeAdapter;
+    SalaryAdapter salaryAdapter;
+
     String fromdate, todate;
     TextInputLayout inputJobName,inputStartDate,inputEndDate,inputspnSalary;
     TextInputLayout inputspnDepartment,inputspnRank,inputspnShip,inputspnLocation;
     TextInputEditText etJobName,startDate,endDate;
-    AutoCompleteTextView spnSalary,spnDepartment,spnRank,spnShip,spnLocation;
+    AutoCompleteTextView spnSalary,spnDepartment,spnRank,spnShip,spnLocation,spnEmployementType;
 
     InternetConnection internetConnection;
 
@@ -193,6 +238,7 @@ public class PostJobFragment extends Fragment {
         spnShip = bottomSheetDialog.findViewById(R.id.spnShip);
         spnSalary = bottomSheetDialog.findViewById(R.id.spnSalary);
         spnLocation = bottomSheetDialog.findViewById(R.id.spnLocation);
+        spnEmployementType = bottomSheetDialog.findViewById(R.id.spnEmployementType);
 
         calendar = Calendar.getInstance();
         mYear = calendar.get(Calendar.YEAR);
@@ -200,6 +246,13 @@ public class PostJobFragment extends Fragment {
         mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
         showDatePicker();
+
+        if (!internetConnection.isConnected(getContext())) {
+            new ShowSnackbar().shortSnackbar(binding.getRoot(),getString(R.string.no_internet));
+        }
+        else {
+            getSpinnerData();
+        }
 
         save_post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -335,7 +388,121 @@ public class PostJobFragment extends Fragment {
         source.add(new PostJobs("Kitchen Jr. Chef","Hotel","Chef","₹10000 - ₹20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
         source.add(new PostJobs("Engine","Enginer","Master","₹10000 - ₹20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
         source.add(new PostJobs("UI/UX Designer","Enginer","Master","₹10000 - ₹20000 per hour","Oil Tanker","Indian Ocean","10/10/2021","12/10/2021"));
+    }
 
+    public void getSpinnerData() {
+        ApiConnection apiInterface = RetrofitBuilder.getRetrofitInstance().create(ApiConnection.class);
+        Call<PostSpinnerResponse> call = apiInterface.getPostSpinner();
+        call.enqueue(new Callback<PostSpinnerResponse>() {
+            @Override
+            public void onResponse(Call<PostSpinnerResponse> call, Response<PostSpinnerResponse> response) {
+                if (response.code() == 200 && response.message().equals("OK")) {
+                    if (response.body().getStatusCode() == 1 && response.body().getStatusMessage().equals("Success")) {
+                        PostSpinnerDataRequest registerData = response.body().getData();
+
+                        //Rank Data
+                        rankRequestList = registerData.getRank();
+                        rankAdapter = new RankAdapter(getContext(),R.layout.custom_spinner_item, rankRequestList);
+                        spnRank.setThreshold(1);
+                        spnRank.setAdapter(rankAdapter);
+
+
+                        spnRank.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                                Log.e("rankId", rankRequestList.get(pos).getActualRankId());
+                                selectedRankId = rankRequestList.get(pos).getActualRankId();
+                                selectedRankName = rankRequestList.get(pos).getActualRankName();
+                                spnRank.setText(selectedRankName);
+                            }
+                        });
+
+                        //Department Data
+                        departmentRequestList = registerData.getDepartment();
+                        departmentAdapter = new DepartmentAdapter(getContext(),R.layout.custom_spinner_item, departmentRequestList);
+                        spnDepartment.setThreshold(1);
+                        spnDepartment.setAdapter(departmentAdapter);
+
+
+                        spnDepartment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                                Log.e("departmentId", departmentRequestList.get(pos).getCdgmId());
+                                selectedDepartmentId = departmentRequestList.get(pos).getCdgmId();
+                                selectedDepartmentName = departmentRequestList.get(pos).getCdgmDesignation();
+                                spnDepartment.setText(selectedDepartmentName);
+                            }
+                        });
+
+                        //Salary Data
+                        salaryRequestList = registerData.getSalary();
+                        salaryAdapter = new SalaryAdapter(getContext(),R.layout.custom_spinner_item, salaryRequestList);
+                        spnSalary.setThreshold(1);
+                        spnSalary.setAdapter(salaryAdapter);
+
+
+                        spnSalary.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                                Log.e("salaryId", salaryRequestList.get(pos).getCsmId());
+                                selectedSalaryId = salaryRequestList.get(pos).getCsmId();
+                                selectedSalaryName = salaryRequestList.get(pos).getSalary();
+                                spnSalary.setText(selectedSalaryName);
+                            }
+                        });
+
+                        //Ship Type Data
+                        shipTypeRequestList = registerData.getShipType();
+                        shipTypeAdapter = new ShipTypeAdapter(getContext(),R.layout.custom_spinner_item, shipTypeRequestList);
+                        spnShip.setThreshold(1);
+                        spnShip.setAdapter(shipTypeAdapter);
+
+
+                        spnShip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                                Log.e("shipId", shipTypeRequestList.get(pos).getVtId());
+                                selectedShipId = shipTypeRequestList.get(pos).getVtId();
+                                selectedShipName = shipTypeRequestList.get(pos).getVtName();
+                                spnShip.setText(selectedShipName);
+                            }
+                        });
+
+                        //Employment Type Type Data
+//                        EmployementTypeRequest employementTypeRequest = registerData.getEmployementType();
+//                        employementTypeRequestList.add(employementTypeRequest);
+//                        customCityAdapter2 = new CityAdapter(getContext(),R.layout.custom_spinner_item, employementTypeRequestList);
+//                        spnEmployementType.setThreshold(1);
+//                        spnEmployementType.setAdapter(customCityAdapter2);
+//
+//
+//                        spnEmployementType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+//                                Log.e("employementTypeId", employementTypeRequestList.get(pos).get1());
+//                                selectedShipId = employementTypeRequestList.get(pos).get();
+//                                selectedShipName = employementTypeRequestList.get(pos).getVtName();
+//                                spnShip.setText(selectedShipName);
+//                            }
+//                        });
+
+                    } else {
+                        if (response.body().getStatusCode() == 0) {
+                            if (response.body().getStatusMessage().equals("Fail")) {
+                                Toast.makeText(getContext(), response.body().getStatusMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), getString(R.string.something_wrong), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostSpinnerResponse> call, Throwable t) {
+
+            }
+        });
     }
 
 

@@ -16,12 +16,13 @@
             android:layout_height="25dp" />
 
         <TextView
-            style="@style/TitleTextView"
             android:id="@+id/login"
+            style="@style/TitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="35dp"
+            android:gravity="center"
             android:text="@string/register"
+            android:textColor="@color/blue_500"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -51,15 +52,16 @@
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:startIconDrawable="@drawable/ic_baseline_company">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCompanyName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
+                    android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="30"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext"/>
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -79,15 +81,46 @@
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:startIconDrawable="@drawable/ic_baseline_person_outline">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
+                    android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="30"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext" />
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rpsl_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:hint="@string/rpsl"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline"
+                app:errorTextColor="@color/red_400"
+                app:helperText="(optional)"
+                app:helperTextEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_card">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etrpsl_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:ems="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="6"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -124,14 +157,15 @@
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:startIconDrawable="@drawable/ic_baseline_alternate_email_24">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmailID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
+                    android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext"/>
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -145,22 +179,23 @@
                 android:hint="@string/mobile_number"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:prefixText="+91"
                 app:errorIconDrawable="@drawable/ic_baseline_error_outline"
                 app:errorTextColor="@color/red_400"
                 app:helperText=""
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
+                app:prefixText="+91"
                 app:startIconDrawable="@drawable/ic_baseline_mobile_friendly_24">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMobileNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
+                    android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="10"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext"/>
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -180,14 +215,15 @@
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:startIconDrawable="@drawable/website_icon">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etwebsite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
+                    android:imeOptions="actionNext"
                     android:inputType="textUri"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext"/>
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -203,19 +239,24 @@
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/ic_baseline_error_outline"
                 app:errorTextColor="@color/red_400"
-                app:helperText=""
+                app:helperText="(optional)"
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:startIconDrawable="@drawable/ic_baseline_location_on_24">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
-                    android:inputType="textPostalAddress"
                     android:ems="1"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext"/>
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:minLines="1"
+                    android:scrollbars="vertical"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -231,20 +272,21 @@
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/ic_baseline_error_outline"
                 app:errorTextColor="@color/red_400"
-                app:helperText=""
+                app:helperText="(optional)"
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:startIconDrawable="@drawable/ic_baseline_pin_drop_24">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
-                    android:inputType="text"
                     android:ems="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:maxLength="6"
-                    android:textSize="16sp"
-                    android:imeOptions="actionNext"/>
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -253,15 +295,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/city_hint"
-                android:textColorHint="@color/black"
-                android:visibility="visible">
+                android:textColorHint="@color/grey"
+                android:visibility="visible"
+                app:helperText="(optional)">
 
                 <AutoCompleteTextView
                     android:id="@+id/spnCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="textNoSuggestions" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -270,17 +313,18 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:hint="@string/state_hint"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/grey"
                 android:visibility="visible"
-                android:layout_marginTop="10dp">
+                app:helperText="(optional)">
 
                 <AutoCompleteTextView
                     android:id="@+id/spnState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="textNoSuggestions" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -289,26 +333,26 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:hint="@string/country_hint"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/grey"
                 android:visibility="visible"
-                android:layout_marginTop="10dp">
+                app:helperText="(optional)">
 
                 <AutoCompleteTextView
                     android:id="@+id/spnCountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="textNoSuggestions" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button"
-            app:cornerRadius="10dp"
             android:id="@+id/btn_register"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -320,11 +364,70 @@
             android:textAllCaps="true"
             android:textColor="#FFF"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
 
-        <View
+        <TextView
+            style="@style/TitleTextView"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/or"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/btnGoogle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/google"
+                android:text="@string/sign_up_with_google" />
+
+            <ImageView
+                android:id="@+id/btnFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/facebook"
+                android:text="@string/sign_up_with_google" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|bottom"
+            android:gravity="center|bottom"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                style="@style/ContentTextView"
+                android:text="@string/alreayd_have_an_account" />
+
+            <TextView
+                android:id="@+id/text_loginin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:clickable="true"
+                android:paddingStart="5dp"
+                style="@style/MediumContent"
+                android:text="@string/login_in" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

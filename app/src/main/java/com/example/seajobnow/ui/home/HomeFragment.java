@@ -149,10 +149,10 @@ public class HomeFragment extends Fragment {
     {
         // Adding items to ArrayList
         sourceNews = new ArrayList<>();
-        sourceNews.add(new HomeNews("We will succeed, and we will create irreversible momentum with our modernization efforts over the next 24 months. Commandant Gen",R.drawable.interview_icon,R.color.blue_500));
-        sourceNews.add(new HomeNews("“What it will be replaced with is not necessarily another vehicle,” Smith said. “It could be, but the capability is to also control air and ground robotics and provide reconnaissance.",R.drawable.application_icon,R.color.green_400));
-        sourceNews.add(new HomeNews("Either model would provide our reserve pilots with the opportunity to become significant contributors to our daily operations",R.drawable.profile_icon,R.color.red_400));
-        sourceNews.add(new HomeNews("Started shedding all RQ-21 aircraft and introduced MQ-9A and VBat Unmanned Aerial Systems for additional experimentation.",R.drawable.unread_message,R.color.yellow_400));
+        sourceNews.add(new HomeNews("We will succeed, and we will create irreversible momentum with our modernization efforts over the next 24 months. Commandant Gen",R.drawable.icon_1,R.color.blue_500));
+        sourceNews.add(new HomeNews("“What it will be replaced with is not necessarily another vehicle,” Smith said. “It could be, but the capability is to also control air and ground robotics and provide reconnaissance.",R.drawable.icon_1,R.color.green_400));
+        sourceNews.add(new HomeNews("Either model would provide our reserve pilots with the opportunity to become significant contributors to our daily operations",R.drawable.icon_1,R.color.red_400));
+        sourceNews.add(new HomeNews("Started shedding all RQ-21 aircraft and introduced MQ-9A and VBat Unmanned Aerial Systems for additional experimentation.",R.drawable.icon_1,R.color.yellow_400));
     }
 
 }

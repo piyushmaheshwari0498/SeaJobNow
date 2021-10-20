@@ -20,12 +20,12 @@
     <string name="exit_prompt">Please press again to exit</string>
     <string name="powered_by_interlink_consultant"><b>Powered by </b> Interlink Consultant</string>
     <string name="password">Password</string>
-    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password">Forgot Password?</string>
     <string name="or">or</string>
     <string name="still_not_connected_register">New to SeaJobNow? Sign up</string>
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="register">Register</string>
+    <string name="register">Create Account</string>
     <string name="login">Login</string>
     <string name="no_internet">No Internet Connection!</string>
     <string name="contact_admin">Please Contact Administrator</string>
@@ -41,21 +41,21 @@
     <string name="retry">Retry</string>
 
     <!--Registration String-->
-    <string name="emailid">Email Address *</string>
+    <string name="emailid">Email Id *</string>
     <string name="company_name">Company Name *</string>
     <string name="mobile_number">Mobile Number *</string>
     <string name="contact_name">Contact Person Name *</string>
-    <string name="company_address">Company Address *</string>
-    <string name="website">Website</string>
-    <string name="pincode">Pincode *</string>
-    <string name="city_hint">City *</string>
-    <string name="state_hint">State *</string>
-    <string name="country_hint">Country *</string>
-    <string name="position">Position *</string>
+    <string name="company_address">Company Address</string>
+    <string name="website">Website *</string>
+    <string name="pincode">Pincode</string>
+    <string name="city_hint">City</string>
+    <string name="state_hint">State</string>
+    <string name="country_hint">Country</string>
+    <string name="position">Company Designation *</string>
     <string name="valid_contact_person">Please Enter Contact Person Name</string>
     <string name="valid_company_name">Please Enter Company Name</string>
     <string name="error_email">Please Enter Email Address</string>
-    <string name="valid_email">Please Enter Valid Email Address</string>
+    <string name="valid_email">Please Enter Valid Email Id</string>
     <string name="error_mobile">Please Enter Mobile Number</string>
     <string name="valid_mobile">Please Enter Valid Mobile Number</string>
     <string name="wrong_details">Wrong details</string>
@@ -69,15 +69,15 @@
     <string name="new_job">New Job Post</string>
     <string name="name">Job Name *</string>
     <string name="rank">Rank *</string>
-    <string name="ship">Type of Ship *</string>
+    <string name="ship">Vessel Type *</string>
     <string name="location">Job Location *</string>
     <string name="cancel"><u>Cancel</u></string>
     <string name="department">Department *</string>
     <string name="startDate">Post Start Date *</string>
-    <string name="endDate">Job End Date *</string>
+    <string name="endDate">Post Expiry Date *</string>
     <string name="salary">Salary *</string>
-    <string name="employementtype">Employement Type *</string>
-    <string name="experieceType">Experience Criteria *</string>
+    <string name="employementtype">Employment Type *</string>
+    <string name="experieceType">Work Experience *</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -94,6 +94,10 @@
     <string name="label_opening">Openings :</string>
     <string name="label_applicants">Job Applicants :</string>
     <string name="current_plan">Current Plan</string>
+    <string name="error_website">Please enter website</string>
+    <string name="rpsl">RPSL ID</string>
+    <string name="alreayd_have_an_account">Alreayd have an account ?</string>
+    <string name="login_in">Login in</string>
 
 
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
@@ -77,8 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 //if this condition returns false it will show error and registration won't be done.
                 else if (!validateCompanyName() | !validatePersonName() | !validateEmail()
-                        | !validateMobile() | !validateAddress() | !validatePincode() | !validateCity()
-                        | !validateState() | !validateCountry()) {
+                        | !validateMobile() | !validateWebsite())
+                    /*| !validateAddress() | !validatePincode() | !validateCity()
+                        | !validateState() | !validateCountry()*/
+                {
                     return;
                 }
                 //if this condition returns true it will proceed to registration.
@@ -193,6 +196,19 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    private boolean validateWebsite() {
+
+        String website = activityRegisterBinding.etwebsite.getText().toString();
+
+        if (activityRegisterBinding.etwebsite.getText().toString().isEmpty()) {
+            activityRegisterBinding.websiteLayout.setError(getString(R.string.error_website));
+            return false;
+        } else {
+            activityRegisterBinding.websiteLayout.setError(null);
+            return true;
+        }
+    }
+
     public void getSpinnerData() {
         ApiConnection apiInterface = RetrofitBuilder.getRetrofitInstance().create(ApiConnection.class);
         Call<SpinnerResponse> call = apiInterface.getSpinner();
@@ -206,9 +222,9 @@ public class RegisterActivity extends AppCompatActivity {
                         //City Data
                         cityRequestList = registerData.getCity();
                         customCityAdapter2 = new CityAdapter(RegisterActivity.this,R.layout.custom_spinner_item, cityRequestList);
-                        activityRegisterBinding.spnCity.setThreshold(1);
-                        activityRegisterBinding.spnCity.setAdapter(customCityAdapter2);
 
+                        activityRegisterBinding.spnCity.setAdapter(customCityAdapter2);
+                        activityRegisterBinding.spnCity.setThreshold(1);
 
                         activityRegisterBinding.spnCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -216,17 +232,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 Log.e("cityId", cityRequestList.get(pos).getCityId());
                                 selectedCityId = cityRequestList.get(pos).getCityId();
                                 selectedCityName = cityRequestList.get(pos).getCityName();
-                                activityRegisterBinding.spnCity.setText(selectedCityName);
+                               // activityRegisterBinding.spnCity.setText(selectedCityName);
                             }
                         });
-
-                        for (int i = 0; i < cityRequestList.size(); i++) {
-                            if (cityname != null) {
-                                if (cityname.equals(cityRequestList.get(i).getCityName())) {
-                                    activityRegisterBinding.spnCity.setText(cityRequestList.get(i).getCityName());
-                                }
-                            }
-                        }
 
                         //State Data
 
@@ -242,13 +250,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 activityRegisterBinding.spnState.setText(selectedStateName);
                             }
                         });
-                        for (int i = 0; i < stateRequestList.size(); i++) {
+                       /* for (int i = 0; i < stateRequestList.size(); i++) {
                             if (statename != null) {
                                 if (statename.equals(stateRequestList.get(i).getStateName())) {
                                     activityRegisterBinding.spnState.setText(stateRequestList.get(i).getStateName());
                                 }
                             }
-                        }
+                        }*/
 
                         //Country Data
                         countryRequestList = registerData.getCountry();
@@ -264,14 +272,14 @@ public class RegisterActivity extends AppCompatActivity {
                                 activityRegisterBinding.spnCountry.setText(selectedCountryName);
                             }
                         });
-                        for (int i = 0; i < countryRequestList.size(); i++) {
+                        /*for (int i = 0; i < countryRequestList.size(); i++) {
                             if (countryname != null) {
                                 if (countryname.equals(countryRequestList.get(i).getCountryName())) {
                                     activityRegisterBinding.spnCountry.setText(countryRequestList.get(i).getCountryName());
                                 }
                             }
 
-                        }
+                        }*/
                     } else {
                         if (response.body().getStatusCode() == 0) {
                             if (response.body().getStatusMessage().equals("Fail")) {

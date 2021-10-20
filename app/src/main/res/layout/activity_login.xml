@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:orientation="vertical"
     android:background="#F5F5F5"
-    android:windowSoftInputMode="adjustResize">
+    android:orientation="vertical"
+    android:windowSoftInputMode="adjustResize"
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,27 +18,25 @@
             android:id="@+id/seajoblogo"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:scaleType="center"
             android:src="@drawable/sealogo"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            style="@style/TitleTextView"
             android:id="@+id/login"
+            style="@style/MediumTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="35dp"
-            android:text="@string/login"
+            android:gravity="center"
+            android:text="Log in to your account"
             android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/companyCodeInputLayout"
-            app:boxStrokeColor="@color/black"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,13 +47,14 @@
             android:gravity="start"
             android:hint="@string/company_code"
             android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
             app:endIconMode="clear_text"
             app:endIconTint="@color/black"
             app:errorEnabled="true"
             app:errorIconDrawable="@drawable/ic_baseline_error_outline"
+            app:errorTextColor="@color/red_400"
             app:helperText=""
             app:helperTextEnabled="true"
-            app:errorTextColor="@color/red_400"
             app:hintAnimationEnabled="true"
             app:hintTextColor="@color/black"
             app:startIconDrawable="@drawable/ic_baseline_person_outline"
@@ -79,7 +76,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordInputLayout"
-            app:boxStrokeColor="@color/black"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,13 +86,14 @@
             android:gravity="start"
             android:hint="@string/password"
             android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
             app:endIconMode="password_toggle"
             app:endIconTint="@color/black"
             app:errorEnabled="true"
             app:errorIconDrawable="@drawable/ic_baseline_error_outline"
+            app:errorTextColor="@color/red_400"
             app:helperText=""
             app:helperTextEnabled="true"
-            app:errorTextColor="@color/red_400"
             app:hintAnimationEnabled="true"
             app:hintTextColor="@color/black"
             app:startIconDrawable="@drawable/ic_baseline_lock_open"
@@ -107,101 +104,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|center"
+                android:autofillHints="password"
                 android:imeOptions="actionGo"
                 android:inputType="textPassword|textNoSuggestions"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:autofillHints="password"/>
+                android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/tvForgotpwd"
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
+            android:gravity="end"
+            android:padding="5dp"
+            android:text="@string/forgot_password"
+            android:textColor="@color/blue_500" />
+
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button"
-            app:cornerRadius="10dp"
             android:id="@+id/btnLogin"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:layout_gravity="center"
             android:text="@string/login"
             android:textColor="@color/white"
-            tools:text="login" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/or"
-            android:textColor="@color/black"
-            style="@style/TitleTextView"/>
-
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:cornerRadius="10dp"
-            android:id="@+id/btnGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            app:strokeColor="@color/black"
-            android:layout_gravity="center"
-            android:text="@string/sign_up_with_google"
-            app:icon="@drawable/google"
-            app:iconTint="@color/black"
-            android:textColor="@color/black"
-            tools:text="login" />
-
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:cornerRadius="10dp"
-            android:id="@+id/btnFacebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:text="Sign up with Facebook"
-            app:icon="@drawable/facebook"
-            app:iconTintMode="screen"
-            android:textColor="@color/bule_700"
-            app:strokeColor="@color/bule_700"
             tools:text="login" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/tvRegister"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="start"
             android:padding="5dp"
             android:text="@string/still_not_connected_register"
             android:textColor="@color/black"
-            android:gravity="start"
-            app:icon="@drawable/ic_baseline_arrow_forward_ios"
-            app:iconGravity="end"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:visibility="visible"
-            android:layout_margin="10dp"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/tvForgotpwd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/forgot_password"
-            android:textColor="@color/black"
-            android:padding="5dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             app:icon="@drawable/ic_baseline_arrow_forward_ios"
-            app:iconGravity="end"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
-
+            app:iconGravity="end" />
 
     </LinearLayout>
 
@@ -210,13 +158,14 @@
         android:layout_height="match_parent"
         android:layout_gravity="center|bottom"
         android:gravity="center|bottom">
+
         <TextView
             android:id="@+id/text"
+            style="@style/ContentTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="bottom"
             android:gravity="center"
-            style="@style/ContentTextView"
             android:text="@string/powered_by_interlink_consultant" />
     </LinearLayout>
 

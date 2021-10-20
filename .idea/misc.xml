@@ -20,7 +20,7 @@
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/app_bar_main.xml" value="0.27291666666666664" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/content_main.xml" value="0.27291666666666664" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/custom_country_spinner_item.xml" value="0.27291666666666664" />
-        <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/custom_spinner_item.xml" value="0.27291666666666664" />
+        <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/custom_spinner_item.xml" value="0.18" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/custom_state_spinner_item.xml" value="0.27291666666666664" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.27291666666666664" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/fragment_candidate.xml" value="0.27291666666666664" />
@@ -29,10 +29,10 @@
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/homenewsitems.xml" value="0.22" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/homepostitems.xml" value="0.33" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/logout_bottom_sheet.xml" value="0.27291666666666664" />
-        <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/my_plans_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/my_plans_fragment.xml" value="0.33" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/nav_header_main.xml" value="0.27291666666666664" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/post_content_scrolling.xml" value="0.25" />
-        <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/postjob_bottom_sheet.xml" value="0.25" />
+        <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/postjob_bottom_sheet.xml" value="0.5" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/layout/postjobs_items.xml" value="0.25" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/menu/activity_main_drawer.xml" value="0.26871794871794874" />
         <entry key="..\:/Android/SeaJobNow2/app/src/main/res/menu/main.xml" value="0.27291666666666664" />
