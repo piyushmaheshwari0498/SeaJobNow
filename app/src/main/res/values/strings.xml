@@ -98,6 +98,10 @@
     <string name="rpsl">RPSL ID</string>
     <string name="alreayd_have_an_account">Alreayd have an account ?</string>
     <string name="login_in">Login in</string>
+    
+    <string name="client_id">232136817631-a0f19snts8kc6s05mhi23a41lndqtvms.apps.googleusercontent.com</string>
+    <string name="client_secret">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</string>
+
 
 
 </resources>

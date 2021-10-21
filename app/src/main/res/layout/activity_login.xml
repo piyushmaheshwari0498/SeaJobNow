@@ -134,7 +134,7 @@
             android:gravity="center"
             android:text="@string/login"
             android:textColor="@color/white"
-            app:cornerRadius="10dp"
+            app:cornerRadius="5dp"
             tools:text="login" />
 
         <com.google.android.material.button.MaterialButton
@@ -143,8 +143,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:gravity="start"
-            android:padding="5dp"
+            android:gravity="start|center"
+            android:layout_gravity="center"
+            android:padding="10dp"
             android:text="@string/still_not_connected_register"
             android:textColor="@color/black"
             android:visibility="visible"
@@ -166,6 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:gravity="center"
+            android:padding="10dp"
             android:text="@string/powered_by_interlink_consultant" />
     </LinearLayout>
 

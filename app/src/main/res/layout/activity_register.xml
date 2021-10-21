@@ -365,7 +365,8 @@
             android:textColor="#FFF"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:cornerRadius="10dp" />
+            app:cornerRadius="5dp"
+            android:padding="5dp"/>
 
         <TextView
             style="@style/TitleTextView"

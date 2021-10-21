@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue_200">#83B3C8</color>
-    <color name="blue_500">#2196F3</color>
+    <color name="blue_200">#e8fffc</color>
+    <color name="blue_500">#0081ff</color>
     <color name="bule_700">#1976D2</color>
-    <color name="teal_200">#FF03DAC5</color>
+    <color name="info_color">#02a2b9</color>
+
+    <color name="teal_200">#edf9f1</color>
+    <color name="teal_500">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="alice_blue">#FFEFF1FE</color>
-    <color name="green_400">#aed582</color>
-    <color name="red_400">#e57373</color>
-    <color name="yellow_400">#EEB96C</color>
-    <color name="grey">#5E5D5D</color>
+
+    <color name="green_400">#1ba345</color>
+
+    <color name="red_400">#de3e44</color>
+    <color name="red_200">#e57373</color>
+
+    <color name="yellow_200">#fffae9</color>
+    <color name="yellow_400">#fec001</color>
+    <color name="yellow_700">#f0ad4e</color>
+
+    <color name="grey">#6b757d</color>
+    <color name="dark_grey">#343a3f</color>
     <color name="light_grey">#D3CECE</color>
-    <color name="info_color">#02a2b9</color>
+
+    <color name="alice_blue">#FFEFF1FE</color>
+    <color name="ghost_white">#f8fafb</color>
+
 </resources>

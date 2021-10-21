@@ -1,14 +1,14 @@
 package com.example.seajobnow;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.seajobnow.ApiEntity.RetrofitBuilder;
 import com.example.seajobnow.ApiEntity.request.CityRequest;
@@ -22,10 +22,17 @@ import com.example.seajobnow.actions.ShowSnackbar;
 import com.example.seajobnow.adapters.CityAdapter;
 import com.example.seajobnow.adapters.CountryAdapter;
 import com.example.seajobnow.adapters.StateAdapter;
-import com.example.seajobnow.databinding.ActivityLoginBinding;
 import com.example.seajobnow.databinding.ActivityRegisterBinding;
+import com.example.seajobnow.session.AppSharedPreference;
+import com.example.seajobnow.utils.Constants;
 import com.example.seajobnow.utils.InternetConnection;
 import com.example.seajobnow.utils.PatternClass;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,12 +41,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener  {
 
     ActivityRegisterBinding activityRegisterBinding;
 
@@ -50,11 +56,14 @@ public class RegisterActivity extends AppCompatActivity {
     CityAdapter customCityAdapter2;
     StateAdapter stateAdapter2;
     CountryAdapter countryAdapter2;
-
+    InternetConnection internetConnection;
     private List<CityRequest> cityRequestList;
     private List<StateRequest> stateRequestList;
     private List<CountryRequest> countryRequestList;
-    InternetConnection internetConnection;
+    GoogleApiClient googleApiClient;
+    private static final int RC_SIGN_IN = 1;
+
+    AppSharedPreference appSharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +71,11 @@ public class RegisterActivity extends AppCompatActivity {
         activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(activityRegisterBinding.getRoot());
         internetConnection = new InternetConnection();
+        appSharedPreference = AppSharedPreference.getAppSharedPreference(this);
 
         if (!internetConnection.isConnected(getApplicationContext())) {
-           new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(),getString(R.string.no_internet));
-        }
-        else {
+            new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(), getString(R.string.no_internet));
+        } else {
             getSpinnerData();
         }
 
@@ -80,14 +89,61 @@ public class RegisterActivity extends AppCompatActivity {
                 else if (!validateCompanyName() | !validatePersonName() | !validateEmail()
                         | !validateMobile() | !validateWebsite())
                     /*| !validateAddress() | !validatePincode() | !validateCity()
-                        | !validateState() | !validateCountry()*/
-                {
+                        | !validateState() | !validateCountry()*/ {
                     return;
                 }
                 //if this condition returns true it will proceed to registration.
                 addRegisterDetails();
             }
         });
+
+        // Configure sign-in to request the user's ID, email address, and basic profile.
+        // ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        googleApiClient=new GoogleApiClient.Builder(RegisterActivity.this)
+                .enableAutoManage(RegisterActivity.this, RegisterActivity.this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .build();
+        activityRegisterBinding.btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                startActivityForResult(intent,RC_SIGN_IN);
+
+            }
+        });
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==RC_SIGN_IN){
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result){
+        if(result.isSuccess()){
+            gotoProfile();
+            Toast.makeText(getApplicationContext(),"Sign in success",Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(),"Sign in cancel",Toast.LENGTH_LONG).show();
+        }
+    }
+    private void gotoProfile(){
+        Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
+        startActivity(intent);
     }
 
     private boolean validateCity() {
@@ -221,25 +277,32 @@ public class RegisterActivity extends AppCompatActivity {
 
                         //City Data
                         cityRequestList = registerData.getCity();
-                        customCityAdapter2 = new CityAdapter(RegisterActivity.this,R.layout.custom_spinner_item, cityRequestList);
-
-                        activityRegisterBinding.spnCity.setAdapter(customCityAdapter2);
+                        customCityAdapter2 = new CityAdapter(RegisterActivity.this, R.layout.custom_spinner_item, cityRequestList);
                         activityRegisterBinding.spnCity.setThreshold(1);
+                        activityRegisterBinding.spnCity.setAdapter(customCityAdapter2);
+
+
 
                         activityRegisterBinding.spnCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                                Log.e("cityId", cityRequestList.get(pos).getCityId());
-                                selectedCityId = cityRequestList.get(pos).getCityId();
-                                selectedCityName = cityRequestList.get(pos).getCityName();
-                               // activityRegisterBinding.spnCity.setText(selectedCityName);
+                                // Log.e("onItemClick cityId", cityRequestList.get(pos).getCityName());
+
+                                customCityAdapter2.getFilter().filter(activityRegisterBinding.spnCity.getText());
+                                selectedCityId = appSharedPreference.getString(Constants.INTENT_KEYS.KEY_CITY_ID);
+                                selectedCityName = String.valueOf(activityRegisterBinding.spnCity.getText());
+                                // activityRegisterBinding.spnCity.setText(selectedCityName);
+                                Log.d("selectedCityName", selectedCityName);
+                                Log.d("selectedCityId", selectedCityId);
                             }
                         });
+
+
 
                         //State Data
 
                         stateRequestList = registerData.getState();
-                        stateAdapter2 = new StateAdapter(RegisterActivity.this,R.layout.custom_spinner_item, stateRequestList);
+                        stateAdapter2 = new StateAdapter(RegisterActivity.this, R.layout.custom_spinner_item, stateRequestList);
                         activityRegisterBinding.spnState.setThreshold(1);
                         activityRegisterBinding.spnState.setAdapter(stateAdapter2);
                         activityRegisterBinding.spnState.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -247,7 +310,8 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                                 selectedStateId = stateRequestList.get(pos).getStateId();
                                 selectedStateName = stateRequestList.get(pos).getStateName();
-                                activityRegisterBinding.spnState.setText(selectedStateName);
+                                Log.d("selectedStateId", selectedStateId);
+                               // activityRegisterBinding.spnState.setText(selectedStateName);
                             }
                         });
                        /* for (int i = 0; i < stateRequestList.size(); i++) {
@@ -261,7 +325,7 @@ public class RegisterActivity extends AppCompatActivity {
                         //Country Data
                         countryRequestList = registerData.getCountry();
 
-                        countryAdapter2 = new CountryAdapter(RegisterActivity.this,R.layout.custom_spinner_item, countryRequestList);
+                        countryAdapter2 = new CountryAdapter(RegisterActivity.this, R.layout.custom_spinner_item, countryRequestList);
                         activityRegisterBinding.spnCountry.setThreshold(1);
                         activityRegisterBinding.spnCountry.setAdapter(countryAdapter2);
                         activityRegisterBinding.spnCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -269,7 +333,8 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                                 selectedCountryId = countryRequestList.get(pos).getCountryId();
                                 selectedCountryName = countryRequestList.get(pos).getCountryName();
-                                activityRegisterBinding.spnCountry.setText(selectedCountryName);
+                               // activityRegisterBinding.spnCountry.setText(selectedCountryName);
+                                Log.d("selectedCountryId", selectedCountryId);
                             }
                         });
                         /*for (int i = 0; i < countryRequestList.size(); i++) {
@@ -309,8 +374,8 @@ public class RegisterActivity extends AppCompatActivity {
                     System.out.println("success" + response.body().getStatusMessage());
                     if (response.body().getStatusCode() == 1 && response.body().getStatusMessage().equals("Success")) {
                         String msg = response.body().getMessage();
-                       // Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_LONG).show();
-                        new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(),msg);
+                        // Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_LONG).show();
+                        new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(), msg);
                         finish();
                     }
                 } else {
@@ -319,13 +384,13 @@ public class RegisterActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             String message = jsonObject.getString("message");
 //                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                            new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(),message);
+                            new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(), message);
                         } catch (JSONException | IOException e) {
                             e.printStackTrace();
                         }
                     } else {
 //                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.something_wrong), Toast.LENGTH_LONG).show();
-                        new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(),getResources().getString(R.string.something_wrong));
+                        new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(), getResources().getString(R.string.something_wrong));
                     }
                 }
             }
@@ -333,7 +398,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
 //                Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(),t.getMessage());
+                new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(), t.getMessage());
             }
         });
     }
