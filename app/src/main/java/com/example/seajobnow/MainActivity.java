@@ -17,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.seajobnow.actions.ShowSnackbar;
+
 import com.example.seajobnow.databinding.ActivityMainBinding;
 import com.example.seajobnow.session.AppSharedPreference;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         setSupportActionBar(binding.appBarMain.toolbar);
 
         appSharedPreference = AppSharedPreference.getAppSharedPreference(this);
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_post_job, R.id.nav_candidates,R.id.nav_plans)
+                R.id.nav_home, R.id.nav_post_job, R.id.nav_candidates,R.id.nav_plans,R.id.nav_post_advertisement)
                 .setOpenableLayout(drawer)
                 .build();
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/alice_blue">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -19,22 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-           <!-- <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonAdd"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center"
-                android:gravity="start|center"
-                android:padding="10dp"
-                android:text="@string/add_post"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:icon="@drawable/ic_baseline_arrow_forward_ios"
-                app:iconGravity="end"
-                app:iconTint="@color/black" />-->
 
             <LinearLayout
                 android:id="@+id/ll_Data_Found"

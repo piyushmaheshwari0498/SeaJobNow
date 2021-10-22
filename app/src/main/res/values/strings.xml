@@ -8,8 +8,9 @@
     <string name="action_notification">Notification</string>
 
     <!--Menu String-->
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Dashboard</string>
     <string name="menu_post_job">Post Jobs</string>
+    <string name="menu_post_advertisement">Post Advertisement</string>
     <string name="menu_candidates">Candidates</string>
     <string name="menu_plans">My Plans</string>
     <string name="menu_proilfe">Profile</string>
@@ -37,7 +38,7 @@
     <string name="enter_companycode">Please Enter Company Code</string>
     <string name="logout">Logout</string>
     <string name="want_to_logout">Are you sure you want to Logout?</string>
-    <string name="some_logout_text">If you logout we will not able to show you latest products.</string>
+    <string name="some_logout_text">If you logout we will not able to show you latest new/updates.</string>
     <string name="retry">Retry</string>
 
     <!--Registration String-->
@@ -98,10 +99,19 @@
     <string name="rpsl">RPSL ID</string>
     <string name="alreayd_have_an_account">Alreayd have an account ?</string>
     <string name="login_in">Login in</string>
-    
+
     <string name="client_id">232136817631-a0f19snts8kc6s05mhi23a41lndqtvms.apps.googleusercontent.com</string>
     <string name="client_secret">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</string>
-
+    <string name="forgot_password_yv">Forgot Password?</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="verify_otp">Enter verification Code</string>
+    <string name="otp_text">Enter 6 digit number that we send to</string>
+    <string name="resend_otp">Resend OTP?</string>
+    <string name="connection_failure">Failed to connect with Server</string>
+    <string name="create_new_password">Create New Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_password">Create Password</string>
 
 
 </resources>

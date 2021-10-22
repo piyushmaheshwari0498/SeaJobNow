@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,7 +26,9 @@ import com.example.seajobnow.adapters.HomePostAdapter;
 import com.example.seajobnow.databinding.FragmentHomeBinding;
 import com.example.seajobnow.model.HomeNews;
 import com.example.seajobnow.model.HomePost;
+import com.example.seajobnow.session.AppSharedPreference;
 import com.example.seajobnow.ui.postjob.PostJobFragment;
+import com.example.seajobnow.utils.Constants;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -50,12 +53,15 @@ public class HomeFragment extends Fragment {
     // Linear Layout Manager
     LinearLayoutManager HorizontalLayout;
 
+    AppSharedPreference appSharedPreference;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
+        appSharedPreference = AppSharedPreference.getAppSharedPreference(getContext());
 
         return binding.getRoot();
     }
@@ -79,6 +85,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         textView_company_name = binding.textCompanyName;
 

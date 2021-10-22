@@ -38,7 +38,21 @@
         android:id="@+id/nav_plans"
         android:name="com.example.seajobnow.ui.plans.MyPlans"
         android:label="@string/menu_plans"
-        tools:layout="@layout/my_plans_fragment" />
+        tools:layout="@layout/my_plans_fragment">
+        <action
+            android:id="@+id/action_nav_plan_to_nav_home"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_post_advertisement"
+        android:name="com.example.seajobnow.ui.advertisement.Advertisement"
+        android:label="@string/menu_post_advertisement"
+        tools:layout="@layout/advertisement_fragment">
+        <action
+            android:id="@+id/action_nav_post_ad_to_nav_home"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
 
     <!--<action
         android:id="@+id/nav_logout"

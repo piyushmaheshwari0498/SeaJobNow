@@ -27,5 +27,6 @@
 
     <color name="alice_blue">#FFEFF1FE</color>
     <color name="ghost_white">#f8fafb</color>
+    <color name="fog_white">#f1f1f1</color>
 
 </resources>

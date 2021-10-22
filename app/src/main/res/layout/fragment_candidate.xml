@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.candidate.CandidateFragment"
-    android:background="@color/white">
+    android:background="@color/alice_blue">
 
     <TextView
         android:id="@+id/text_slideshow"

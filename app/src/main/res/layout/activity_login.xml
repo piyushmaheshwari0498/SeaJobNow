@@ -65,14 +65,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|center"
-                android:digits="0123456789,qwertzuiopasdfghjklyxcvbnm,QWERTZUIOPASDFGHJKLYXCVBNM"
                 android:inputType="textCapCharacters"
                 android:singleLine="true"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
+                android:text="SJNAK0001"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
-
+        <!--android:digits="0123456789,qwertzuiopasdfghjklyxcvbnm,QWERTZUIOPASDFGHJKLYXCVBNM"-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordInputLayout"
@@ -108,6 +108,7 @@
                 android:imeOptions="actionGo"
                 android:inputType="textPassword|textNoSuggestions"
                 android:textColor="@color/black"
+                android:text="123"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 

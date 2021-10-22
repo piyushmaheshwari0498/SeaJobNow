@@ -1,6 +1,5 @@
 package com.example.seajobnow;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,13 +26,6 @@ import com.example.seajobnow.session.AppSharedPreference;
 import com.example.seajobnow.utils.Constants;
 import com.example.seajobnow.utils.InternetConnection;
 import com.example.seajobnow.utils.PatternClass;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener  {
+public class RegisterActivity extends AppCompatActivity {
 
     ActivityRegisterBinding activityRegisterBinding;
 
@@ -57,13 +49,10 @@ public class RegisterActivity extends AppCompatActivity  implements GoogleApiCli
     StateAdapter stateAdapter2;
     CountryAdapter countryAdapter2;
     InternetConnection internetConnection;
+    AppSharedPreference appSharedPreference;
     private List<CityRequest> cityRequestList;
     private List<StateRequest> stateRequestList;
     private List<CountryRequest> countryRequestList;
-    GoogleApiClient googleApiClient;
-    private static final int RC_SIGN_IN = 1;
-
-    AppSharedPreference appSharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,53 +86,13 @@ public class RegisterActivity extends AppCompatActivity  implements GoogleApiCli
             }
         });
 
-        // Configure sign-in to request the user's ID, email address, and basic profile.
-        // ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        googleApiClient=new GoogleApiClient.Builder(RegisterActivity.this)
-                .enableAutoManage(RegisterActivity.this, RegisterActivity.this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
-        activityRegisterBinding.btnGoogle.setOnClickListener(new View.OnClickListener() {
+        activityRegisterBinding.textLoginin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-                startActivityForResult(intent,RC_SIGN_IN);
-
+                finish();
             }
         });
-    }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RC_SIGN_IN){
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        }
-    }
-
-    private void handleSignInResult(GoogleSignInResult result){
-        if(result.isSuccess()){
-            gotoProfile();
-            Toast.makeText(getApplicationContext(),"Sign in success",Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(getApplicationContext(),"Sign in cancel",Toast.LENGTH_LONG).show();
-        }
-    }
-    private void gotoProfile(){
-        Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
-        startActivity(intent);
     }
 
     private boolean validateCity() {
@@ -282,7 +231,6 @@ public class RegisterActivity extends AppCompatActivity  implements GoogleApiCli
                         activityRegisterBinding.spnCity.setAdapter(customCityAdapter2);
 
 
-
                         activityRegisterBinding.spnCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
@@ -298,7 +246,6 @@ public class RegisterActivity extends AppCompatActivity  implements GoogleApiCli
                         });
 
 
-
                         //State Data
 
                         stateRequestList = registerData.getState();
@@ -311,7 +258,7 @@ public class RegisterActivity extends AppCompatActivity  implements GoogleApiCli
                                 selectedStateId = stateRequestList.get(pos).getStateId();
                                 selectedStateName = stateRequestList.get(pos).getStateName();
                                 Log.d("selectedStateId", selectedStateId);
-                               // activityRegisterBinding.spnState.setText(selectedStateName);
+                                // activityRegisterBinding.spnState.setText(selectedStateName);
                             }
                         });
                        /* for (int i = 0; i < stateRequestList.size(); i++) {
@@ -333,7 +280,7 @@ public class RegisterActivity extends AppCompatActivity  implements GoogleApiCli
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                                 selectedCountryId = countryRequestList.get(pos).getCountryId();
                                 selectedCountryName = countryRequestList.get(pos).getCountryName();
-                               // activityRegisterBinding.spnCountry.setText(selectedCountryName);
+                                // activityRegisterBinding.spnCountry.setText(selectedCountryName);
                                 Log.d("selectedCountryId", selectedCountryId);
                             }
                         });

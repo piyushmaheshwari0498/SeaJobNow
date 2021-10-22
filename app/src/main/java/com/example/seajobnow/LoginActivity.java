@@ -19,6 +19,7 @@ import com.example.seajobnow.ApiEntity.RetrofitBuilder;
 import com.example.seajobnow.ApiEntity.request.LoginRequest;
 import com.example.seajobnow.ApiEntity.response.LoginResponse;
 import com.example.seajobnow.Apinterface.ApiConnection;
+import com.example.seajobnow.activity.ForgotPasswordActivity;
 import com.example.seajobnow.databinding.ActivityLoginBinding;
 import com.example.seajobnow.session.AppSharedPreference;
 import com.example.seajobnow.utils.Constants;
@@ -106,6 +107,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        activityLoginBinding.tvForgotpwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
         checkIsloggedIn();
     }
     public boolean validateCompanyCode() {
@@ -185,16 +194,17 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (JSONException | IOException e) {
                             e.printStackTrace();
                         }
-                    } else {
-                        Custom_Toast.warning(LoginActivity.this,
-                                getResources().getString(R.string.something_wrong));
-                    }
+                    } /*else {
+                        Custom_Toast.info(LoginActivity.this,
+                                "Failed to connect with Server");
+                    }*/
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Custom_Toast.warning(LoginActivity.this, t.getMessage());
+                Custom_Toast.info(LoginActivity.this,
+                        getString(R.string.connection_failure));
 
             }
         });

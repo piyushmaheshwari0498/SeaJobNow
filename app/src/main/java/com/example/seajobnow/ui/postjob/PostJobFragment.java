@@ -413,7 +413,7 @@ public class PostJobFragment extends Fragment {
                                 Log.e("rankId", rankRequestList.get(pos).getActualRankId());
                                 selectedRankId = rankRequestList.get(pos).getActualRankId();
                                 selectedRankName = rankRequestList.get(pos).getActualRankName();
-                                spnRank.setText(selectedRankName);
+//                                spnRank.setText(selectedRankName);
                             }
                         });
 
@@ -430,7 +430,7 @@ public class PostJobFragment extends Fragment {
                                 Log.e("departmentId", departmentRequestList.get(pos).getCdgmId());
                                 selectedDepartmentId = departmentRequestList.get(pos).getCdgmId();
                                 selectedDepartmentName = departmentRequestList.get(pos).getCdgmDesignation();
-                                spnDepartment.setText(selectedDepartmentName);
+//                                spnDepartment.setText(selectedDepartmentName);
                             }
                         });
 
@@ -447,7 +447,7 @@ public class PostJobFragment extends Fragment {
                                 Log.e("salaryId", salaryRequestList.get(pos).getCsmId());
                                 selectedSalaryId = salaryRequestList.get(pos).getCsmId();
                                 selectedSalaryName = salaryRequestList.get(pos).getSalary();
-                                spnSalary.setText(selectedSalaryName);
+//                                spnSalary.setText(selectedSalaryName);
                             }
                         });
 
@@ -464,7 +464,7 @@ public class PostJobFragment extends Fragment {
                                 Log.e("shipId", shipTypeRequestList.get(pos).getVtId());
                                 selectedShipId = shipTypeRequestList.get(pos).getVtId();
                                 selectedShipName = shipTypeRequestList.get(pos).getVtName();
-                                spnShip.setText(selectedShipName);
+//                                spnShip.setText(selectedShipName);
                             }
                         });
 

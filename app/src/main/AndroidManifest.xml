@@ -18,18 +18,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SeaJobNow"
         android:usesCleartextTraffic="true">
+
         <activity
-            android:name=".activity.PostDetails_Activity"
+            android:name=".activity.ForgotPasswordActivity"
             android:exported="false"
-            android:theme="@style/Theme.SeaJobNow.NoActionBar" />
+            android:theme="@style/Theme.SeaJobNow" />
+
         <activity
-            android:name=".RegisterActivity"
-            android:exported="true"
-            android:theme="@style/Theme.SeaJobNow.NoActionBar" />
+            android:name=".activity.VerifyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SeaJobNow" />
+
+        <activity
+            android:name=".activity.ConfirmPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SeaJobNow" />
+
+        <activity
+            android:name=".activity.AdvertisementDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SeaJobNow" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.SeaJobNow.NoActionBar" />
+
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SeaJobNow.NoActionBar" />
+
+        <activity
+            android:name=".activity.PostDetails_Activity"
+            android:exported="false"
+            android:theme="@style/Theme.SeaJobNow.NoActionBar" />
+
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"
@@ -40,6 +64,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
