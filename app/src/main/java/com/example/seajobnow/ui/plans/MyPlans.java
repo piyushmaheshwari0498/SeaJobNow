@@ -1,5 +1,6 @@
 package com.example.seajobnow.ui.plans;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,13 @@ public class MyPlans extends Fragment {
         appSharedPreference = AppSharedPreference.getAppSharedPreference(getContext());
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(appSharedPreference.getString(Constants.INTENT_KEYS.KEY_COMPANY_NAME));
 
+        binding.btnUpgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),UpgradePlanActivity.class);
+                startActivity(intent);
+            }
+        });
         return binding.getRoot();
     }
 

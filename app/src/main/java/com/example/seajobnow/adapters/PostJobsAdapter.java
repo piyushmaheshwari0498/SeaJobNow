@@ -7,7 +7,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -15,9 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seajobnow.R;
-import com.example.seajobnow.actions.ShowSnackbar;
-import com.example.seajobnow.activity.PostDetails_Activity;
-import com.example.seajobnow.model.HomeNews;
+import com.example.seajobnow.ui.postjob.PostDetails_Activity;
 import com.example.seajobnow.model.PostJobs;
 
 import java.util.List;

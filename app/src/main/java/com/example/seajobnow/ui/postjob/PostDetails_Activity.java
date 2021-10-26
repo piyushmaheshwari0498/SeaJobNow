@@ -1,4 +1,4 @@
-package com.example.seajobnow.activity;
+package com.example.seajobnow.ui.postjob;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -28,7 +28,6 @@ public class PostDetails_Activity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
 
         internetConnection = new InternetConnection();
-
 
         binding.toolbarLayout.setTitle(getIntent().getStringExtra("post_title"));
 

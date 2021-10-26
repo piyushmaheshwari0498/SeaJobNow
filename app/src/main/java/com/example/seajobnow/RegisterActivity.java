@@ -1,13 +1,20 @@
 package com.example.seajobnow;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.example.seajobnow.ApiEntity.RetrofitBuilder;
 import com.example.seajobnow.ApiEntity.request.CityRequest;
@@ -26,13 +33,19 @@ import com.example.seajobnow.session.AppSharedPreference;
 import com.example.seajobnow.utils.Constants;
 import com.example.seajobnow.utils.InternetConnection;
 import com.example.seajobnow.utils.PatternClass;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import in.aabhasjindal.otptextview.OtpTextView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,6 +67,10 @@ public class RegisterActivity extends AppCompatActivity {
     private List<StateRequest> stateRequestList;
     private List<CountryRequest> countryRequestList;
 
+    DatePickerDialog datePickerDialog;
+    Calendar calendar;
+    int mDay, mMonth, mYear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,22 +84,31 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             getSpinnerData();
         }
+        calendar = Calendar.getInstance();
+        mYear = calendar.get(Calendar.YEAR);
+        mMonth = calendar.get(Calendar.MONTH);
+        mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        activityRegisterBinding.btnRegister.setOnClickListener(new View.OnClickListener() {
+        showDatePicker();
+
+        activityRegisterBinding.btnNextRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!internetConnection.isConnected(getApplicationContext())) {
                     new ShowSnackbar().shortSnackbar(activityRegisterBinding.getRoot(), getString(R.string.no_internet));
                 }
+                else {
+                    showBottomSheetDialog();
+                }
                 //if this condition returns false it will show error and registration won't be done.
-                else if (!validateCompanyName() | !validatePersonName() | !validateEmail()
+               /* else if (!validateCompanyName() | !validateRPSLID() | !validateRPSLDATE() | !validatePersonName() | !validateEmail()
                         | !validateMobile() | !validateWebsite())
-                    /*| !validateAddress() | !validatePincode() | !validateCity()
-                        | !validateState() | !validateCountry()*/ {
+                    *//*| !validateAddress() | !validatePincode() | !validateCity()
+                        | !validateState() | !validateCountry()*//* {
                     return;
                 }
                 //if this condition returns true it will proceed to registration.
-                addRegisterDetails();
+                addRegisterDetails();*/
             }
         });
 
@@ -93,6 +119,30 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void showDatePicker() {
+        activityRegisterBinding.etrpslDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog = new DatePickerDialog(RegisterActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                                int newMonth = monthOfYear + 1;
+                                String monthObtained = newMonth < 10 ? "0" + newMonth : String.valueOf(newMonth);
+                                String dayObtained = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+                                String displayDate = dayObtained + "-" + monthObtained + "-" + year;
+                                activityRegisterBinding.etrpslDate.setText(displayDate);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.setCancelable(false);
+                datePickerDialog.show();
+            }
+        });
     }
 
     private boolean validateCity() {
@@ -132,6 +182,28 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else {
             activityRegisterBinding.companyNameLayout.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateRPSLID() {
+        String rpsl = activityRegisterBinding.etrpslId.getText().toString();
+        if (rpsl.isEmpty()) {
+            activityRegisterBinding.rpslLayout.setError(getString(R.string.valid_rpsl));
+            return false;
+        } else {
+            activityRegisterBinding.rpslLayout.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateRPSLDATE() {
+        String rpsl_date = activityRegisterBinding.etrpslDate.getText().toString();
+        if (rpsl_date.isEmpty()) {
+            activityRegisterBinding.rpslDateLayout.setError(getString(R.string.valid_rpsl_date));
+            return false;
+        } else {
+            activityRegisterBinding.rpslDateLayout.setError(null);
             return true;
         }
     }
@@ -372,6 +444,44 @@ public class RegisterActivity extends AppCompatActivity {
         map.put("countryname", selectedCountryId);
         map.put("comp_position", "1");
         return map;
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void showBottomSheetDialog() {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.verify_registration_bottom_sheet);
+
+        MaterialButton logout_yes = bottomSheetDialog.findViewById(R.id.btnSubmit);
+        OtpTextView emailOtpTextView = bottomSheetDialog.findViewById(R.id.email_otp_view);
+        OtpTextView mobileOtpTextView = bottomSheetDialog.findViewById(R.id.mobile_otp_view);
+        TextView emailTextView = bottomSheetDialog.findViewById(R.id.emailsubtext);
+        TextView mobileTextView = bottomSheetDialog.findViewById(R.id.mobilesubtext);
+
+        bottomSheetDialog.getBehavior().setHideable(false);
+        bottomSheetDialog.setCancelable(true);
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        bottomSheetDialog.show();
+
+        String subText = getString(R.string.otp_text);
+        emailTextView.setText(subText + "\n"+"maheshwaripiyush@gmail.com");
+        mobileTextView.setText(subText + "\n"+"+91 7021507178");
+
+        logout_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
     }
 
 }

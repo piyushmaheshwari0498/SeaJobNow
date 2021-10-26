@@ -18,15 +18,14 @@
 
             <TextView
                 style="@style/TitleTextView"
-                android:padding="5dp"
-                android:textColor="#0027FF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/current_plan"
                 android:fontFamily="@font/roboto_bold"
-                android:textSize="20sp"
-                />
+                android:padding="5dp"
+                android:text="@string/current_plan"
+                android:textColor="#0027FF"
+                android:textSize="20sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -60,7 +59,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:text="Basic Plan" />
+                            android:text="Premium Plan" />
 
                         <TextView
                             android:id="@+id/tv_plan_validity"
@@ -68,7 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:text="Expires on Jan 11, 2022 11:06 AM"
+                            android:text="Expires on Oct 19, 2022 11:06 AM"
                             android:textColor="@color/grey" />
                     </LinearLayout>
 
@@ -100,7 +99,7 @@
                                 android:layout_gravity="bottom"
                                 android:gravity="end"
                                 android:padding="5dp"
-                                android:text="2 Resumes"
+                                android:text="15 Resumes"
                                 android:textSize="16sp" />
 
                             <TextView
@@ -110,7 +109,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="end"
-                                android:text="remaining of 2 Resume/DAY"
+                                android:text="remaining of 15 Resume/DAY"
                                 android:textColor="@color/grey"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -118,10 +117,11 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_total_resume"
+                        android:id="@+id/ll_unfiltered_resume"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="0dp"
@@ -129,7 +129,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="start|center"
-                            android:text="Total Resume" />
+                            android:text="Unfiltered Data" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -145,7 +145,7 @@
                                 android:layout_gravity="bottom"
                                 android:gravity="end"
                                 android:padding="5dp"
-                                android:text="60 Resumes"
+                                android:text="5 per/week"
                                 android:textSize="16sp" />
 
                             <TextView
@@ -157,12 +157,13 @@
                                 android:gravity="end"
                                 android:text="remaining of 60 Resumes"
                                 android:textColor="@color/grey"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"
+                                android:visibility="gone" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_job_post"
+                        android:id="@+id/ll_smart_resume"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
@@ -173,7 +174,39 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="start|center"
-                            android:text="Job Post" />
+                            android:text="Smart Data" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/TitleTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:gravity="end"
+                                android:padding="5dp"
+                                android:text="YES"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_account_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="start|center"
+                            android:text="Account User" />
 
 
                         <LinearLayout
@@ -190,25 +223,15 @@
                                 android:layout_gravity="bottom"
                                 android:gravity="end"
                                 android:padding="5dp"
-                                android:text="10 Jobpost"
+                                android:text="UNLIMITED User"
                                 android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/textview_remaining_jobpost"
-                                style="@style/TitleTextView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:gravity="end"
-                                android:text="remaining of 10 Jobpost"
-                                android:textColor="@color/grey"
-                                android:textSize="14sp" />
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_advertisement"
+                        android:id="@+id/ll_download_days"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
@@ -219,7 +242,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="start|center"
-                            android:text="Advertisement" />
+                            android:text="Download Days" />
 
 
                         <LinearLayout
@@ -229,63 +252,278 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/textview_advertisement"
                                 style="@style/TitleTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="end"
                                 android:padding="5dp"
-                                android:text="24 Advertisement"
-
+                                android:text="7 Days a week"
                                 android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/textview_remaining_advertisement"
-                                style="@style/TitleTextView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:gravity="end"
-                                android:text="remaining of 24 Advertisment"
-                                android:textColor="@color/grey"
-                                android:textSize="14sp" />
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_whatsapp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:scaleType="centerInside"
+                            android:layout_gravity="center"
+                            android:src="@drawable/black_check" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="bottom"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="Whatsapp"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:scaleType="centerInside"
+                            android:layout_gravity="center"
+                            android:src="@drawable/black_check" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="bottom"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="Email"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_sms"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:scaleType="centerInside"
+                            android:layout_gravity="center"
+                            android:src="@drawable/black_check" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="bottom"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="SMS"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_manager"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:scaleType="centerInside"
+                            android:layout_gravity="center"
+                            android:src="@drawable/black_check" />
+
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="bottom"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="Relationship Manager"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_mobile_access"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:scaleType="centerInside"
+                            android:layout_gravity="center"
+                            android:src="@drawable/black_check" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="bottom"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="Mobile App Access"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_urgent_vacancy"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:scaleType="centerInside"
+                            android:layout_gravity="center"
+                            android:src="@drawable/black_check" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="bottom"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="Urgent Vacancy Support"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_bmti_training"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:scaleType="centerInside"
+                            android:layout_gravity="center"
+                            android:src="@drawable/black_check" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="BMTI Trained Candidate"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:id="@+id/ll_buttons"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        >
+                        android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
+                            android:enabled="false"
                             android:gravity="center"
                             android:text="Renew"
-                            app:strokeColor="@color/blue_500"
-                            android:layout_margin="5dp"
-                            android:enabled="false"
-                            />
+                            android:visibility="visible"
+                            app:strokeColor="@color/blue_500" />
 
 
                         <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_upgrade"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="Upgrade"
-                            android:layout_margin="5dp"
-                            app:strokeColor="@color/blue_500"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:visibility="visible"
+                            app:strokeColor="@color/blue_500" />
 
 
                     </LinearLayout>
@@ -299,11 +537,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="*Plan Started on Oct 20, 2021 12.06 AM"
                 android:textColor="@color/grey"
-                android:textSize="14sp"
-                android:layout_marginTop="10dp"/>
+                android:textSize="14sp" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

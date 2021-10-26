@@ -237,7 +237,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="top|center"
                             android:inputType="number"
-                            android:text="16.5"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
@@ -361,7 +360,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
-                        android:hint="@string/location"
+                        android:hint="@string/trading_area"
                         android:textColorHint="@color/grey"
                         android:visibility="visible">
 

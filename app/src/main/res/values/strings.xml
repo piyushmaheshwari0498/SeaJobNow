@@ -96,7 +96,7 @@
     <string name="label_applicants">Job Applicants :</string>
     <string name="current_plan">Current Plan</string>
     <string name="error_website">Please enter website</string>
-    <string name="rpsl">RPSL ID</string>
+    <string name="rpsl">RPSL ID *</string>
     <string name="alreayd_have_an_account">Alreayd have an account ?</string>
     <string name="login_in">Login in</string>
 
@@ -112,6 +112,14 @@
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="create_password">Create Password</string>
+    <string name="trading_area">Trading Area *</string>
+    <string name="next">Next</string>
+    <string name="rpsl_date">RPSL Expiry Date</string>
+    <string name="valid_rpsl">Please Enter RPSL ID</string>
+    <string name="valid_rpsl_date">PLease Enter RPSL Expiry Date</string>
+    <string name="verify_mobile_email"><![CDATA[Verify Mobile & Email Id]]></string>
+    <string name="some_verify_text"><![CDATA[Please Enter OTP sent on your Email Id & Mobile Number]]></string>
+    <string name="verify_amp_register"><![CDATA[Verify & Register]]></string>
 
 
 </resources>

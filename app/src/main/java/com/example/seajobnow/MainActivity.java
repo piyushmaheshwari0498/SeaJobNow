@@ -1,15 +1,17 @@
 package com.example.seajobnow;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -17,7 +19,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.seajobnow.actions.ShowSnackbar;
-
 import com.example.seajobnow.databinding.ActivityMainBinding;
 import com.example.seajobnow.session.AppSharedPreference;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     boolean doubleBackPressed = false;
     AppSharedPreference appSharedPreference;
+    //Create these objects above OnCreate()of your main activity
+    TextView menu_post_counts;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_post_job, R.id.nav_candidates,R.id.nav_plans,R.id.nav_post_advertisement)
+                R.id.nav_home, R.id.nav_post_job, R.id.nav_candidates, R.id.nav_plans, R.id.nav_post_advertisement)
                 .setOpenableLayout(drawer)
                 .build();
 
@@ -68,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.getMenu().getItem(0).setChecked(true);
+
+        //These lines should be added in the OnCreate() of your main activity
+        menu_post_counts = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().findItem(R.id.nav_post_job));
 
         View headerView = navigationView.getHeaderView(0);
         ImageView logout = headerView.findViewById(R.id.imageView_logout);
@@ -86,7 +92,15 @@ public class MainActivity extends AppCompatActivity {
          **/
         appSharedPreference.checkLogin(this);
 
+        initializeCountDrawer();
+    }
 
+    private void initializeCountDrawer(){
+        //Gravity property aligns the text
+        menu_post_counts.setGravity(Gravity.CENTER_VERTICAL);
+        menu_post_counts.setTypeface(null, Typeface.BOLD);
+        menu_post_counts.setTextColor(getResources().getColor(R.color.bule_700));
+        menu_post_counts.setText("99+");
     }
 
     @Override

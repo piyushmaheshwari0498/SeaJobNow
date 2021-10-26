@@ -66,6 +66,68 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rpsl_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:hint="@string/rpsl"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline"
+                app:errorTextColor="@color/red_400"
+                app:helperText=""
+                app:helperTextEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_card">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etrpsl_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:ems="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="6"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rpsl_date_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:hint="@string/rpsl_date"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline"
+                app:errorTextColor="@color/red_400"
+                app:helperText=""
+                app:helperTextEnabled="true"
+                app:hintAnimationEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_card">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etrpsl_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:ems="1"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/contact_name_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -91,36 +153,6 @@
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="30"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/rpsl_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center"
-                android:layout_marginTop="8dp"
-                android:gravity="start"
-                android:hint="@string/rpsl"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@drawable/ic_baseline_error_outline"
-                app:errorTextColor="@color/red_400"
-                app:helperText="(optional)"
-                app:helperTextEnabled="true"
-                app:hintAnimationEnabled="true"
-                app:startIconDrawable="@drawable/ic_baseline_card">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etrpsl_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:ems="1"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:maxLength="6"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -352,7 +384,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_next_register"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -361,7 +393,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:text="Register"
+            android:text="@string/next"
             android:textAllCaps="true"
             android:textColor="#FFF"
             android:textSize="15sp"
