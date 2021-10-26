@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:windowSoftInputMode="adjustPan"
+    android:layout_marginBottom="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            style="@style/TitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/verify_mobile_email"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:gravity="center"
+           />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/some_verify_text"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:gravity="center"
+            style="@style/MediumTextView"/>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/header"
+                style="@style/TitleTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/verify_otp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/dim_foreground_material_light"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/emailsubtext"
+                style="@style/MediumTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/otp_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/dim_foreground_material_light" />
+
+
+            <in.aabhasjindal.otptextview.OtpTextView
+                android:id="@+id/email_otp_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                app:bar_enabled="true"
+                app:bar_active_color="@color/black"
+                app:bar_inactive_color="@color/ghost_white"
+                app:bar_height="1dp"
+                app:length="6"
+                app:otp_box_background_active="@color/alice_blue"
+                app:otp_box_background_inactive="@color/ghost_white"
+                app:otp_text_size="24dp" />
+
+
+            <TextView
+                android:id="@+id/mobilesubtext"
+                style="@style/MediumTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/otp_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/dim_foreground_material_light" />
+
+
+            <in.aabhasjindal.otptextview.OtpTextView
+                android:id="@+id/mobile_otp_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                app:bar_enabled="true"
+                app:bar_active_color="@color/black"
+                app:bar_inactive_color="@color/ghost_white"
+                app:bar_height="1dp"
+                app:length="6"
+                app:otp_box_background_active="@color/alice_blue"
+                app:otp_box_background_inactive="@color/ghost_white"
+                app:otp_text_size="24dp" />
+
+
+            <TextView
+                android:id="@+id/tv_resend"
+                style="@style/MediumTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/resend_otp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue_500" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="@string/verify_amp_register"
+                android:textColor="@color/white"
+                app:cornerRadius="5dp"/>
+            <!--</LinearLayout>-->
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
