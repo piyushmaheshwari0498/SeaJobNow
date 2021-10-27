@@ -10,6 +10,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.seajobnow.ApiEntity.request.CityRequest;
 import com.example.seajobnow.ApiEntity.request.DepartmentRequest;
 import com.example.seajobnow.ApiEntity.request.RankRequest;
@@ -22,14 +24,16 @@ public class DepartmentAdapter extends ArrayAdapter<DepartmentRequest> implement
     private final Context mContext;
     private final List<DepartmentRequest> mDepartmentRequest;
     private final List<DepartmentRequest> mDepartmentRequestListAll;
+    private List<DepartmentRequest> mDepartmentRequestListSuggestion;
     private final int mLayoutResourceId;
 
     public DepartmentAdapter(Context context, int resource, List<DepartmentRequest> deptRequests) {
         super(context, resource, deptRequests);
         this.mContext = context;
         this.mLayoutResourceId = resource;
-        this.mDepartmentRequest = new ArrayList<>(deptRequests);
+        this.mDepartmentRequest = deptRequests;
         this.mDepartmentRequestListAll = new ArrayList<>(deptRequests);
+        this.mDepartmentRequestListSuggestion = new ArrayList<>();
     }
 
     public int getCount() {
@@ -60,47 +64,52 @@ public class DepartmentAdapter extends ArrayAdapter<DepartmentRequest> implement
         return convertView;
     }
 
+    @NonNull
     @Override
     public Filter getFilter() {
-        return new Filter() {
-            @Override
-            public String convertResultToString(Object resultValue) {
-                return ((DepartmentRequest) resultValue).getCdgmDesignation();
-            }
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                List<DepartmentRequest> departmentRequestSuggestion = new ArrayList<>();
-                if (constraint != null) {
-                    for (DepartmentRequest deptRequest : mDepartmentRequestListAll) {
-                        if (deptRequest.getCdgmDesignation().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
-                            departmentRequestSuggestion.add(deptRequest);
-                        }
-                    }
-                    filterResults.values = departmentRequestSuggestion;
-                    filterResults.count = departmentRequestSuggestion.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mDepartmentRequest.clear();
-                if (results != null && results.count > 0) {
-                    // avoids unchecked cast warning when using mDepartments.addAll((ArrayList<Department>) results.values);
-                    for (Object object : (List<?>) results.values) {
-                        if (object instanceof CityRequest) {
-                            mDepartmentRequest.add((DepartmentRequest) object);
-                        }
-                    }
-                    notifyDataSetChanged();
-                } else if (constraint == null) {
-                    // no filter, add entire original list back in
-                    mDepartmentRequest.addAll(mDepartmentRequestListAll);
-                    notifyDataSetInvalidated();
-                }
-            }
-        };
+        return deptFilter;
     }
+
+    private Filter deptFilter = new Filter() {
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            DepartmentRequest departmentRequest = (DepartmentRequest) resultValue;
+            return departmentRequest.getCdgmDesignation();
+        }
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            if (charSequence != null) {
+                mDepartmentRequestListSuggestion.clear();
+                for (DepartmentRequest departmentRequest : mDepartmentRequestListAll) {
+                    if (departmentRequest.getCdgmDesignation().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
+                        mDepartmentRequestListSuggestion.add(departmentRequest);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mDepartmentRequestListSuggestion;
+                filterResults.count = mDepartmentRequestListSuggestion.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            ArrayList<DepartmentRequest> tempValues = (ArrayList<DepartmentRequest>) filterResults.values;
+            if (filterResults != null && filterResults.count > 0) {
+                clear();
+                for (DepartmentRequest deptobj : tempValues) {
+                    add(deptobj);
+                }
+                notifyDataSetChanged();
+            } else {
+                clear();
+                for (DepartmentRequest deptobj : mDepartmentRequestListAll) {
+                    add(deptobj);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    };
 }

@@ -2,9 +2,9 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/alice_blue"
-    android:layout_margin="10dp">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_marginBottom="20dp"
                 android:elevation="10dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="10dp"
@@ -30,12 +29,26 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <View
-                    android:id="@+id/plan_color"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:background="@color/black" />
+
+                    <View
+                        android:id="@+id/plan_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:background="@color/black" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_best_offer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@color/info_color"
+                    android:gravity="center"
+                    android:text="Best Offer"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
                 <LinearLayout
                     android:id="@+id/ll_add_address"
                     android:layout_width="match_parent"
@@ -49,30 +62,74 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
 
-                        <TextView
-                            android:id="@+id/tv_plan_name"
-                            style="@style/TitleTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:padding="20dp"
-                            android:text="Premium Plan" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_plan_name"
+                                style="@style/TitleTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center|start"
+                                android:gravity="start|center"
+                                android:padding="10dp"
+                                android:text="Premium Plan" />
+
+                        </LinearLayout>
+
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_upgrade"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_margin="5dp"
+                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="Upgrade"
                             android:textSize="14sp"
                             android:visibility="visible"
                             app:strokeColor="@color/blue_500" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="start|center"
+                            android:text="Package Cost"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_package_price"
+                            style="@style/TitleTextView"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:gravity="end"
+                            android:padding="5dp"
+                            android:text="2.5 Lakh"
+                            android:textSize="16sp" />
+
+
                     </LinearLayout>
 
 
@@ -369,7 +426,7 @@
                     <LinearLayout
                         android:id="@+id/ll_whatsapp"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -383,7 +440,7 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
@@ -402,7 +459,7 @@
                     <LinearLayout
                         android:id="@+id/ll_email"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -416,13 +473,13 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -435,7 +492,7 @@
                     <LinearLayout
                         android:id="@+id/ll_sms"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -449,13 +506,13 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -465,11 +522,10 @@
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:id="@+id/ll_manager"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -483,13 +539,13 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -502,7 +558,7 @@
                     <LinearLayout
                         android:id="@+id/ll_mobile_access"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -516,13 +572,13 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -533,9 +589,42 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_service"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_sevice_visit"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/black_check" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="Service Visit per Month"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/ll_urgent_vacancy"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -549,13 +638,13 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -568,7 +657,7 @@
                     <LinearLayout
                         android:id="@+id/ll_bmti_training"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -582,13 +671,13 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -601,6 +690,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
+
 
     </androidx.core.widget.NestedScrollView>
 

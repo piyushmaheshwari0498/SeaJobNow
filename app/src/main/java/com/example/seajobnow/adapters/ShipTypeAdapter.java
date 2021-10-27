@@ -10,6 +10,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.seajobnow.ApiEntity.request.CityRequest;
 import com.example.seajobnow.ApiEntity.request.DepartmentRequest;
 import com.example.seajobnow.ApiEntity.request.ShipTypeRequest;
@@ -21,15 +23,17 @@ import java.util.List;
 public class ShipTypeAdapter extends ArrayAdapter<ShipTypeRequest> implements Filterable {
     private final Context mContext;
     private final List<ShipTypeRequest> mShipRequest;
-    private final List<ShipTypeRequest> mShipRequestListAll;
+    private List<ShipTypeRequest> mShipRequestListAll;
+    private List<ShipTypeRequest> mShipRequestListSuggestion;
     private final int mLayoutResourceId;
 
     public ShipTypeAdapter(Context context, int resource, List<ShipTypeRequest> shipRequests) {
         super(context, resource, shipRequests);
         this.mContext = context;
         this.mLayoutResourceId = resource;
-        this.mShipRequest = new ArrayList<>(shipRequests);
+        this.mShipRequest = shipRequests;
         this.mShipRequestListAll = new ArrayList<>(shipRequests);
+        this.mShipRequestListSuggestion = new ArrayList<>();
     }
 
     public int getCount() {
@@ -60,47 +64,52 @@ public class ShipTypeAdapter extends ArrayAdapter<ShipTypeRequest> implements Fi
         return convertView;
     }
 
+    @NonNull
     @Override
     public Filter getFilter() {
-        return new Filter() {
-            @Override
-            public String convertResultToString(Object resultValue) {
-                return ((ShipTypeRequest) resultValue).getVtName();
-            }
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                List<ShipTypeRequest> shipRequestSuggestion = new ArrayList<>();
-                if (constraint != null) {
-                    for (ShipTypeRequest shipRequest : mShipRequestListAll) {
-                        if (shipRequest.getVtName().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
-                            shipRequestSuggestion.add(shipRequest);
-                        }
-                    }
-                    filterResults.values = shipRequestSuggestion;
-                    filterResults.count = shipRequestSuggestion.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mShipRequest.clear();
-                if (results != null && results.count > 0) {
-                    // avoids unchecked cast warning when using mDepartments.addAll((ArrayList<Department>) results.values);
-                    for (Object object : (List<?>) results.values) {
-                        if (object instanceof CityRequest) {
-                            mShipRequest.add((ShipTypeRequest) object);
-                        }
-                    }
-                    notifyDataSetChanged();
-                } else if (constraint == null) {
-                    // no filter, add entire original list back in
-                    mShipRequest.addAll(mShipRequestListAll);
-                    notifyDataSetInvalidated();
-                }
-            }
-        };
+        return shipFilter;
     }
+
+    private Filter shipFilter = new Filter() {
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            ShipTypeRequest shipTypeRequest = (ShipTypeRequest) resultValue;
+            return shipTypeRequest.getVtName();
+        }
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            if (charSequence != null) {
+                mShipRequestListSuggestion.clear();
+                for (ShipTypeRequest shipTypeRequest : mShipRequestListAll) {
+                    if (shipTypeRequest.getVtName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
+                        mShipRequestListSuggestion.add(shipTypeRequest);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mShipRequestListSuggestion;
+                filterResults.count = mShipRequestListSuggestion.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            ArrayList<ShipTypeRequest> tempValues = (ArrayList<ShipTypeRequest>) filterResults.values;
+            if (filterResults != null && filterResults.count > 0) {
+                clear();
+                for (ShipTypeRequest shipobj : tempValues) {
+                    add(shipobj);
+                }
+                notifyDataSetChanged();
+            } else {
+                clear();
+                for (ShipTypeRequest shipobj : mShipRequestListAll) {
+                    add(shipobj);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    };
 }

@@ -120,6 +120,7 @@
     <string name="verify_mobile_email"><![CDATA[Verify Mobile & Email Id]]></string>
     <string name="some_verify_text"><![CDATA[Please Enter OTP sent on your Email Id & Mobile Number]]></string>
     <string name="verify_amp_register"><![CDATA[Verify & Register]]></string>
+    <string name="job_title">Job Title *</string>
 
 
 </resources>

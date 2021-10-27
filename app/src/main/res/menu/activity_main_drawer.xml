@@ -31,7 +31,8 @@
                 <item
                     android:id="@+id/nav_post_advertisement"
                     android:icon="@drawable/advertisment"
-                    android:title="@string/menu_post_advertisement" />
+                    android:title="@string/menu_post_advertisement"
+                    android:visible="false"/>
 
             </group>
         </menu>

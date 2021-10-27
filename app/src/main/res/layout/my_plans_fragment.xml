@@ -267,20 +267,21 @@
                     <LinearLayout
                         android:id="@+id/ll_whatsapp"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/img_whatsapp"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:scaleType="centerInside"
                             android:layout_gravity="center"
+                            android:scaleType="centerInside"
                             android:src="@drawable/black_check" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
@@ -299,26 +300,27 @@
                     <LinearLayout
                         android:id="@+id/ll_email"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/img_email"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:scaleType="centerInside"
                             android:layout_gravity="center"
+                            android:scaleType="centerInside"
                             android:src="@drawable/black_check" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -331,26 +333,27 @@
                     <LinearLayout
                         android:id="@+id/ll_sms"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/img_sms"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:scaleType="centerInside"
                             android:layout_gravity="center"
+                            android:scaleType="centerInside"
                             android:src="@drawable/black_check" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -360,31 +363,30 @@
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:id="@+id/ll_manager"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/img_manager"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:scaleType="centerInside"
                             android:layout_gravity="center"
+                            android:scaleType="centerInside"
                             android:src="@drawable/black_check" />
-
 
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -397,26 +399,27 @@
                     <LinearLayout
                         android:id="@+id/ll_mobile_access"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/img_mob_access"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:scaleType="centerInside"
                             android:layout_gravity="center"
+                            android:scaleType="centerInside"
                             android:src="@drawable/black_check" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -427,28 +430,62 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_urgent_vacancy"
+                        android:id="@+id/ll_service"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/img_sevice_visit"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:scaleType="centerInside"
                             android:layout_gravity="center"
+                            android:scaleType="centerInside"
                             android:src="@drawable/black_check" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:gravity="start|center"
+                                android:padding="5dp"
+                                android:text="Service Visit per Month"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_urgent_vacancy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_urgent"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/black_check" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:gravity="start|center"
                                 android:padding="5dp"
@@ -461,26 +498,27 @@
                     <LinearLayout
                         android:id="@+id/ll_bmti_training"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/img_bmti"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:scaleType="centerInside"
                             android:layout_gravity="center"
+                            android:scaleType="centerInside"
                             android:src="@drawable/black_check" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="start|center"
                                 android:padding="5dp"

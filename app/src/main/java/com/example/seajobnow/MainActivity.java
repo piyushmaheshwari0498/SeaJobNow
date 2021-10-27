@@ -2,6 +2,8 @@ package com.example.seajobnow;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -21,6 +24,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.seajobnow.actions.ShowSnackbar;
 import com.example.seajobnow.databinding.ActivityMainBinding;
 import com.example.seajobnow.session.AppSharedPreference;
+import com.example.seajobnow.utils.Constants;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
          * logged in
          **/
         appSharedPreference.checkLogin(this);
-
+        getSupportActionBar().setSubtitle(appSharedPreference.getString(Constants.INTENT_KEYS.KEY_COMPANY_NAME));
         initializeCountDrawer();
     }
 
@@ -113,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        getSupportActionBar().setSubtitle(appSharedPreference.getString(Constants.INTENT_KEYS.KEY_COMPANY_NAME));
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }

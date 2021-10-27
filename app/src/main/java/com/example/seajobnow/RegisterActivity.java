@@ -19,6 +19,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.seajobnow.ApiEntity.RetrofitBuilder;
 import com.example.seajobnow.ApiEntity.request.CityRequest;
 import com.example.seajobnow.ApiEntity.request.CountryRequest;
+import com.example.seajobnow.ApiEntity.request.RankRequest;
 import com.example.seajobnow.ApiEntity.request.SpinnerDataRequest;
 import com.example.seajobnow.ApiEntity.request.StateRequest;
 import com.example.seajobnow.ApiEntity.response.RegisterResponse;
@@ -306,14 +307,11 @@ public class RegisterActivity extends AppCompatActivity {
                         activityRegisterBinding.spnCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                                // Log.e("onItemClick cityId", cityRequestList.get(pos).getCityName());
-
-                                customCityAdapter2.getFilter().filter(activityRegisterBinding.spnCity.getText());
-                                selectedCityId = appSharedPreference.getString(Constants.INTENT_KEYS.KEY_CITY_ID);
-                                selectedCityName = String.valueOf(activityRegisterBinding.spnCity.getText());
-                                // activityRegisterBinding.spnCity.setText(selectedCityName);
-                                Log.d("selectedCityName", selectedCityName);
-                                Log.d("selectedCityId", selectedCityId);
+                                CityRequest cityRequest = (CityRequest) adapterView.getItemAtPosition(pos);
+                                selectedCityId = cityRequest.getCityId();
+                                selectedCityName = cityRequest.getCityName();
+                                Log.e("cityId", selectedCityId);
+                                Log.e("cityName", selectedCityName);
                             }
                         });
 
@@ -324,22 +322,17 @@ public class RegisterActivity extends AppCompatActivity {
                         stateAdapter2 = new StateAdapter(RegisterActivity.this, R.layout.custom_spinner_item, stateRequestList);
                         activityRegisterBinding.spnState.setThreshold(1);
                         activityRegisterBinding.spnState.setAdapter(stateAdapter2);
+
                         activityRegisterBinding.spnState.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                                selectedStateId = stateRequestList.get(pos).getStateId();
-                                selectedStateName = stateRequestList.get(pos).getStateName();
-                                Log.d("selectedStateId", selectedStateId);
-                                // activityRegisterBinding.spnState.setText(selectedStateName);
+                                StateRequest stateRequest = (StateRequest) adapterView.getItemAtPosition(pos);
+                                selectedStateId = stateRequest.getStateId();
+                                selectedStateName = stateRequest.getStateName();
+                                Log.e("stateId", selectedStateId);
+                                Log.e("stateName", selectedStateName);
                             }
                         });
-                       /* for (int i = 0; i < stateRequestList.size(); i++) {
-                            if (statename != null) {
-                                if (statename.equals(stateRequestList.get(i).getStateName())) {
-                                    activityRegisterBinding.spnState.setText(stateRequestList.get(i).getStateName());
-                                }
-                            }
-                        }*/
 
                         //Country Data
                         countryRequestList = registerData.getCountry();
@@ -350,20 +343,13 @@ public class RegisterActivity extends AppCompatActivity {
                         activityRegisterBinding.spnCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                                selectedCountryId = countryRequestList.get(pos).getCountryId();
-                                selectedCountryName = countryRequestList.get(pos).getCountryName();
-                                // activityRegisterBinding.spnCountry.setText(selectedCountryName);
-                                Log.d("selectedCountryId", selectedCountryId);
+                                CountryRequest countryRequest = (CountryRequest) adapterView.getItemAtPosition(pos);
+                                selectedCountryId = countryRequest.getCountryId();
+                                selectedCountryName = countryRequest.getCountryName();
+                                Log.e("countryId", selectedCountryId);
+                                Log.e("countryName", selectedCountryName);
                             }
                         });
-                        /*for (int i = 0; i < countryRequestList.size(); i++) {
-                            if (countryname != null) {
-                                if (countryname.equals(countryRequestList.get(i).getCountryName())) {
-                                    activityRegisterBinding.spnCountry.setText(countryRequestList.get(i).getCountryName());
-                                }
-                            }
-
-                        }*/
                     } else {
                         if (response.body().getStatusCode() == 0) {
                             if (response.body().getStatusMessage().equals("Fail")) {

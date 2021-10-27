@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.seajobnow.ApiEntity.RetrofitBuilder;
+import com.example.seajobnow.ApiEntity.request.CityRequest;
 import com.example.seajobnow.ApiEntity.request.DepartmentRequest;
 import com.example.seajobnow.ApiEntity.request.DesignationRequest;
 import com.example.seajobnow.ApiEntity.request.EmployementTypeRequest;
@@ -52,6 +54,7 @@ import com.example.seajobnow.actions.ShowSnackbar;
 import com.example.seajobnow.adapters.CityAdapter;
 import com.example.seajobnow.adapters.CountryAdapter;
 import com.example.seajobnow.adapters.DepartmentAdapter;
+import com.example.seajobnow.adapters.EmployementTypeAdapter;
 import com.example.seajobnow.adapters.HomePostAdapter;
 import com.example.seajobnow.adapters.PostJobsAdapter;
 import com.example.seajobnow.adapters.RankAdapter;
@@ -59,6 +62,7 @@ import com.example.seajobnow.adapters.SalaryAdapter;
 import com.example.seajobnow.adapters.ShipTypeAdapter;
 import com.example.seajobnow.adapters.StateAdapter;
 import com.example.seajobnow.databinding.FragmentPostjobBinding;
+import com.example.seajobnow.model.EmployementType;
 import com.example.seajobnow.model.HomeNews;
 import com.example.seajobnow.model.HomePost;
 import com.example.seajobnow.model.PostJobs;
@@ -91,12 +95,13 @@ public class PostJobFragment extends Fragment {
     //Spinner Lists
     List<RankRequest> rankRequestList;
     List<DepartmentRequest> departmentRequestList;
-    List<EmployementTypeRequest> employementTypeRequestList;
+    List<EmployementType> employementTypeRequestList;
     List<ShipTypeRequest> shipTypeRequestList;
     List<SalaryRequest> salaryRequestList;
 
     //Selected Id & Name
-    String selectedRankId,selectedDepartmentId,selectedShipId,selectedSalaryId,selectedEmployementTypeId;
+    int selectedEmployementTypeId;
+    String selectedRankId,selectedDepartmentId,selectedShipId,selectedSalaryId;
     String selectedRankName,selectedDepartmentName,selectedShipName,selectedSalaryName,selectedEmployementTypeMame;
 
     //Adapters
@@ -104,12 +109,14 @@ public class PostJobFragment extends Fragment {
     DepartmentAdapter departmentAdapter;
     ShipTypeAdapter shipTypeAdapter;
     SalaryAdapter salaryAdapter;
+    EmployementTypeAdapter employementTypeAdapter;
+
 
     String fromdate, todate;
     TextInputLayout inputJobName,inputStartDate,inputEndDate,inputspnSalary;
     TextInputLayout inputspnDepartment,inputspnRank,inputspnShip,inputspnLocation;
-    TextInputEditText etJobName,startDate,endDate;
-    AutoCompleteTextView spnSalary,spnDepartment,spnRank,spnShip,spnLocation,spnEmployementType;
+    TextInputEditText etJobName,startDate,endDate,spnLocation;
+    AutoCompleteTextView spnSalary,spnDepartment,spnRank,spnShip,spnEmployementType;
 
     InternetConnection internetConnection;
 
@@ -208,7 +215,7 @@ public class PostJobFragment extends Fragment {
     private void showBottomSheetDialog() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
         bottomSheetDialog.setContentView(R.layout.postjob_bottom_sheet);
-        bottomSheetDialog.setCancelable(false);
+        bottomSheetDialog.setCancelable(true);
 
         //For Scrolling on Keyboard visible
         bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -410,9 +417,12 @@ public class PostJobFragment extends Fragment {
                         spnRank.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                                Log.e("rankId", rankRequestList.get(pos).getActualRankId());
-                                selectedRankId = rankRequestList.get(pos).getActualRankId();
-                                selectedRankName = rankRequestList.get(pos).getActualRankName();
+
+                                RankRequest rankRequest = (RankRequest) adapterView.getItemAtPosition(pos);
+                                Log.e("rankId", rankRequest.getActualRankId());
+                                Log.e("rankName", rankRequest.getActualRankName());
+                                selectedRankId = rankRequest.getActualRankId();
+                                selectedRankName = rankRequest.getActualRankName();
 //                                spnRank.setText(selectedRankName);
                             }
                         });
@@ -427,10 +437,11 @@ public class PostJobFragment extends Fragment {
                         spnDepartment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                                Log.e("departmentId", departmentRequestList.get(pos).getCdgmId());
-                                selectedDepartmentId = departmentRequestList.get(pos).getCdgmId();
-                                selectedDepartmentName = departmentRequestList.get(pos).getCdgmDesignation();
-//                                spnDepartment.setText(selectedDepartmentName);
+                                DepartmentRequest departmentRequest = (DepartmentRequest) adapterView.getItemAtPosition(pos);
+                                selectedDepartmentId = departmentRequest.getCdgmId();
+                                selectedDepartmentName = departmentRequest.getCdgmDesignation();
+                                Log.e("deptId", selectedDepartmentId);
+                                Log.e("deptName", selectedDepartmentName);
                             }
                         });
 
@@ -440,14 +451,13 @@ public class PostJobFragment extends Fragment {
                         spnSalary.setThreshold(1);
                         spnSalary.setAdapter(salaryAdapter);
 
-
                         spnSalary.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                                 Log.e("salaryId", salaryRequestList.get(pos).getCsmId());
                                 selectedSalaryId = salaryRequestList.get(pos).getCsmId();
                                 selectedSalaryName = salaryRequestList.get(pos).getSalary();
-//                                spnSalary.setText(selectedSalaryName);
+                                spnSalary.setText(selectedSalaryName,false);
                             }
                         });
 
@@ -457,34 +467,31 @@ public class PostJobFragment extends Fragment {
                         spnShip.setThreshold(1);
                         spnShip.setAdapter(shipTypeAdapter);
 
-
                         spnShip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                                Log.e("shipId", shipTypeRequestList.get(pos).getVtId());
-                                selectedShipId = shipTypeRequestList.get(pos).getVtId();
-                                selectedShipName = shipTypeRequestList.get(pos).getVtName();
-//                                spnShip.setText(selectedShipName);
+                                ShipTypeRequest shipTypeRequest = (ShipTypeRequest) adapterView.getItemAtPosition(pos);
+                                selectedShipId = shipTypeRequest.getVtId();
+                                selectedShipName = shipTypeRequest.getVtName();
+                                Log.e("deptId", selectedDepartmentId);
+                                Log.e("deptName", selectedDepartmentName);
                             }
                         });
 
+                        addEmployementTypeSpinner();
+
+                        Log.d("employementTypeList",employementTypeRequestList.toString());
                         //Employment Type Type Data
-//                        EmployementTypeRequest employementTypeRequest = registerData.getEmployementType();
-//                        employementTypeRequestList.add(employementTypeRequest);
-//                        customCityAdapter2 = new CityAdapter(getContext(),R.layout.custom_spinner_item, employementTypeRequestList);
-//                        spnEmployementType.setThreshold(1);
-//                        spnEmployementType.setAdapter(customCityAdapter2);
-//
-//
-//                        spnEmployementType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-//                                Log.e("employementTypeId", employementTypeRequestList.get(pos).get1());
-//                                selectedShipId = employementTypeRequestList.get(pos).get();
-//                                selectedShipName = employementTypeRequestList.get(pos).getVtName();
-//                                spnShip.setText(selectedShipName);
-//                            }
-//                        });
+                        spnEmployementType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                                selectedEmployementTypeId = employementTypeRequestList.get(pos).getTypeId();
+                                selectedEmployementTypeMame = employementTypeRequestList.get(pos).getTypeName();
+                                spnEmployementType.setText(employementTypeRequestList.get(pos).getTypeName(),false);
+                                Log.e("selectedtTypeMame",selectedEmployementTypeMame);
+                                Log.e("selectedtTypeId", String.valueOf(selectedEmployementTypeId));
+                            }
+                        });
 
                     } else {
                         if (response.body().getStatusCode() == 0) {
@@ -503,6 +510,18 @@ public class PostJobFragment extends Fragment {
 
             }
         });
+    }
+
+    public void addEmployementTypeSpinner()
+    {
+        // Adding items to ArrayList
+        employementTypeRequestList = new ArrayList<>();
+        employementTypeRequestList.add(new EmployementType(1,"Part Time"));
+        employementTypeRequestList.add(new EmployementType(2,"Full Time"));
+        employementTypeRequestList.add(new EmployementType(3,"Contract"));
+        employementTypeAdapter = new EmployementTypeAdapter(getContext(),R.layout.custom_spinner_item,
+                employementTypeRequestList);
+        spnEmployementType.setAdapter(employementTypeAdapter);
     }
 
 

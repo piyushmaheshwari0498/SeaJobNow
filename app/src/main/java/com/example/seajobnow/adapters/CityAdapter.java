@@ -11,7 +11,10 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.seajobnow.ApiEntity.request.CityRequest;
+import com.example.seajobnow.ApiEntity.request.RankRequest;
 import com.example.seajobnow.R;
 import com.example.seajobnow.session.AppSharedPreference;
 import com.example.seajobnow.utils.Constants;
@@ -24,6 +27,7 @@ public class CityAdapter extends ArrayAdapter<CityRequest> implements Filterable
     private final Context mContext;
     List<CityRequest> mCityRequests;
     List<CityRequest> mCityRequestListAll;
+    List<CityRequest> mCityRequestSuggestion;
     private final int mLayoutResourceId;
     AppSharedPreference appSharedPreference;
 
@@ -31,8 +35,9 @@ public class CityAdapter extends ArrayAdapter<CityRequest> implements Filterable
         super(context, 0, cityRequests);
         this.mContext = context;
         this.mLayoutResourceId = resource;
-        this.mCityRequests = new ArrayList<>(cityRequests);
+        this.mCityRequests = cityRequests;
         this.mCityRequestListAll = new ArrayList<>(cityRequests);
+        this.mCityRequestSuggestion = new ArrayList<>();
         appSharedPreference = AppSharedPreference.getAppSharedPreference(context);
     }
 
@@ -66,63 +71,52 @@ public class CityAdapter extends ArrayAdapter<CityRequest> implements Filterable
         return convertView;
     }
 
-    private Filter cityFilter = new Filter() {
-        @Override
-        public String convertResultToString(Object resultValue) {
-            return ((CityRequest) resultValue).getCityName();
-        }
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            FilterResults filterResults = new FilterResults();
-            List<CityRequest> cityRequestSuggestion = new ArrayList<>();
-            appSharedPreference.putStringValue(Constants.INTENT_KEYS.KEY_CITY_ID,"");
-
-            if (constraint == null || constraint.length() == 0) {
-                cityRequestSuggestion.addAll(mCityRequestListAll);
-            }
-            else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (CityRequest cityRequest : mCityRequestListAll) {
-                    if (cityRequest.getCityName().toLowerCase().trim().startsWith(filterPattern)) {
-                        cityRequestSuggestion.add(cityRequest);
-                        Log.e("selected cityId",cityRequest.getCityId());
-                        Log.e("selected cityName",cityRequest.getCityName());
-                        appSharedPreference.putStringValue(Constants.INTENT_KEYS.KEY_CITY_ID,cityRequest.getCityId());
-                    }
-                }
-                //Log.e("cityId values",cityRequestSuggestion.toString());
-                filterResults.values = cityRequestSuggestion;
-                filterResults.count = cityRequestSuggestion.size();
-            }
-
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            mCityRequests.clear();
-                if (results != null && results.count > 0) {
-                    // avoids unchecked cast warning when using mDepartments.addAll((ArrayList<Department>) results.values);
-                    for (Object object : (List<?>) results.values) {
-                        if (object instanceof CityRequest) {
-                            mCityRequests.add((CityRequest) object);
-                        }
-                    }
-//                    Log.d("cityId values", results.values.toString());
-//                    mCityRequests.addAll((ArrayList<CityRequest>) results.values);
-                    notifyDataSetChanged();
-                } /*else if (constraint == null) {
-                    // no filter, add entire original list back in
-                    mCityRequests.addAll(mCityRequestListAll);
-                    notifyDataSetInvalidated();
-                }*/
-//            mCityRequests.addAll((ArrayList<CityRequest>) results.values);
-        }
-    };
-
-
+    @NonNull
     @Override
     public Filter getFilter() {
         return cityFilter;
     }
+
+    private Filter cityFilter = new Filter() {
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            CityRequest cityRequest = (CityRequest) resultValue;
+            return cityRequest.getCityName();
+        }
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            if (charSequence != null) {
+                mCityRequestSuggestion.clear();
+                for (CityRequest cityRequest : mCityRequestListAll) {
+                    if (cityRequest.getCityName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
+                        mCityRequestSuggestion.add(cityRequest);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mCityRequestSuggestion;
+                filterResults.count = mCityRequestSuggestion.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            ArrayList<CityRequest> tempValues = (ArrayList<CityRequest>) filterResults.values;
+            if (filterResults != null && filterResults.count > 0) {
+                clear();
+                for (CityRequest cityObj : tempValues) {
+                    add(cityObj);
+                }
+                notifyDataSetChanged();
+            } else {
+                clear();
+                for (CityRequest cityObj : mCityRequestListAll) {
+                    add(cityObj);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    };
 }

@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
 
         appSharedPreference = AppSharedPreference.getAppSharedPreference(getContext());
 
+       // ((MainActivity) getActivity()).getActionBar().setSubtitle(appSharedPreference.getString(Constants.INTENT_KEYS.KEY_COMPANY_NAME));
         return binding.getRoot();
     }
 

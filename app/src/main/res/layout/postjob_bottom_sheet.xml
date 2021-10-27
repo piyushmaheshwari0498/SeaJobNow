@@ -75,15 +75,15 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center"
                     android:gravity="start"
-                    android:hint="@string/name"
+                    android:hint="@string/job_title"
                     app:endIconMode="clear_text"
                     app:endIconTint="@color/black"
-                    app:hintTextColor="@color/grey"
                     app:errorEnabled="false"
                     app:errorIconDrawable="@drawable/ic_baseline_error_outline"
                     app:errorTextColor="@color/errorColor"
                     app:helperTextEnabled="true"
-                    app:hintAnimationEnabled="true">
+                    app:hintAnimationEnabled="true"
+                    app:hintTextColor="@color/grey">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etJobName"
@@ -100,13 +100,13 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
                     android:hint="@string/job_desc"
                     android:visibility="visible"
-                    app:errorEnabled="true"
                     app:counterEnabled="true"
-                    app:hintTextColor="@color/grey"
-                    android:layout_marginTop="5dp"
-                    app:counterMaxLength="1000">
+                    app:counterMaxLength="1000"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/grey">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etJobDesc"
@@ -127,6 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center"
+                    android:layout_marginTop="5dp"
                     android:gravity="start"
                     android:hint="@string/job_opening"
                     app:endIconMode="clear_text"
@@ -134,12 +135,11 @@
                     app:errorEnabled="false"
                     app:errorIconDrawable="@drawable/ic_baseline_error_outline"
                     app:errorTextColor="@color/errorColor"
-                    app:helperTextEnabled="true"
-                    app:hintTextColor="@color/grey"
-                    android:layout_marginTop="5dp"
                     app:helperText="Total number of job openings"
+                    app:helperTextEnabled="true"
                     app:helperTextTextColor="@color/info_color"
-                    app:hintAnimationEnabled="true">
+                    app:hintAnimationEnabled="true"
+                    app:hintTextColor="@color/grey">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etJobOpening"
@@ -158,16 +158,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center"
+                    android:layout_marginTop="5dp"
                     android:gravity="start"
                     android:hint="@string/startDate"
+                    android:visibility="gone"
                     app:endIconMode="clear_text"
                     app:endIconTint="@color/black"
                     app:errorEnabled="false"
-                    android:visibility="gone"
                     app:errorIconDrawable="@drawable/ic_baseline_error_outline"
                     app:errorTextColor="@color/errorColor"
                     app:helperTextEnabled="true"
-                    android:layout_marginTop="5dp"
                     app:hintAnimationEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -191,6 +191,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center"
+                    android:layout_marginTop="5dp"
                     android:gravity="start"
                     android:hint="@string/endDate"
                     app:endIconMode="clear_text"
@@ -199,7 +200,6 @@
                     app:errorIconDrawable="@drawable/ic_baseline_error_outline"
                     app:errorTextColor="@color/errorColor"
                     app:helperTextEnabled="true"
-                    android:layout_marginTop="5dp"
                     app:hintAnimationEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -242,9 +242,8 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputspnemployementType"
+                        android:id="@+id/inputspnEmployementType"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -259,12 +258,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            tools:ignore="LabelFor"
-                            android:inputType="textNoSuggestions"/>
+                            android:inputType="none"
+                            tools:ignore="LabelFor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-
-
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inputspnSalary"
@@ -282,8 +279,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            tools:ignore="LabelFor"
-                            android:inputType="textNoSuggestions"/>
+                            android:inputType="none"
+                            tools:ignore="LabelFor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -304,8 +301,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            tools:ignore="LabelFor"
-                            android:inputType="textNoSuggestions"/>
+                            android:inputType="textNoSuggestions"
+                            tools:ignore="LabelFor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -326,9 +323,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            tools:ignore="LabelFor"
                             android:inputType="textNoSuggestions"
-                            />
+                            tools:ignore="LabelFor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -349,28 +345,30 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            tools:ignore="LabelFor"
-                            android:inputType="textNoSuggestions"/>
+                            android:inputType="textNoSuggestions"
+                            tools:ignore="LabelFor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inputspnLocation"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:hint="@string/trading_area"
-                        android:textColorHint="@color/grey"
                         android:visibility="visible">
 
-                        <AutoCompleteTextView
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/spnLocation"
                             style="@style/MediumTextView"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:inputType="textNoSuggestions"/>
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

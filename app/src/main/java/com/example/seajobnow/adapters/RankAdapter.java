@@ -10,6 +10,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.seajobnow.ApiEntity.request.CityRequest;
 import com.example.seajobnow.ApiEntity.request.RankRequest;
 import com.example.seajobnow.R;
@@ -21,14 +23,16 @@ public class RankAdapter extends ArrayAdapter<RankRequest> implements Filterable
     private final Context mContext;
     private final List<RankRequest> mRankRequest;
     private final List<RankRequest> mRankRequestListAll;
+    private List<RankRequest> rankRequestSuggestion;
     private final int mLayoutResourceId;
 
     public RankAdapter(Context context, int resource, List<RankRequest> rankRequests) {
         super(context, resource, rankRequests);
         this.mContext = context;
         this.mLayoutResourceId = resource;
-        this.mRankRequest = new ArrayList<>(rankRequests);
+        this.mRankRequest = rankRequests;
         this.mRankRequestListAll = new ArrayList<>(rankRequests);
+        this.rankRequestSuggestion = new ArrayList<>();
     }
 
     public int getCount() {
@@ -59,47 +63,54 @@ public class RankAdapter extends ArrayAdapter<RankRequest> implements Filterable
         return convertView;
     }
 
+    @NonNull
     @Override
     public Filter getFilter() {
-        return new Filter() {
-            @Override
-            public String convertResultToString(Object resultValue) {
-                return ((RankRequest) resultValue).getActualRankName();
-            }
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                List<RankRequest> rankRequestSuggestion = new ArrayList<>();
-                if (constraint != null) {
-                    for (RankRequest rankRequest : mRankRequestListAll) {
-                        if (rankRequest.getActualRankName().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
-                            rankRequestSuggestion.add(rankRequest);
-                        }
-                    }
-                    filterResults.values = rankRequestSuggestion;
-                    filterResults.count = rankRequestSuggestion.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mRankRequest.clear();
-                if (results != null && results.count > 0) {
-                    // avoids unchecked cast warning when using mDepartments.addAll((ArrayList<Department>) results.values);
-                    for (Object object : (List<?>) results.values) {
-                        if (object instanceof CityRequest) {
-                            mRankRequest.add((RankRequest) object);
-                        }
-                    }
-                    notifyDataSetChanged();
-                } else if (constraint == null) {
-                    // no filter, add entire original list back in
-                    mRankRequest.addAll(mRankRequestListAll);
-                    notifyDataSetInvalidated();
-                }
-            }
-        };
+        return fruitFilter;
     }
+
+    private Filter fruitFilter = new Filter() {
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            RankRequest fruit = (RankRequest) resultValue;
+            return fruit.getActualRankName();
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            if (charSequence != null) {
+                rankRequestSuggestion.clear();
+                for (RankRequest fruit : mRankRequestListAll) {
+                    if (fruit.getActualRankName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
+                        rankRequestSuggestion.add(fruit);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = rankRequestSuggestion;
+                filterResults.count = rankRequestSuggestion.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            ArrayList<RankRequest> tempValues = (ArrayList<RankRequest>) filterResults.values;
+            if (filterResults != null && filterResults.count > 0) {
+                clear();
+                for (RankRequest fruitObj : tempValues) {
+                    add(fruitObj);
+                }
+                notifyDataSetChanged();
+            } else {
+                clear();
+                for (RankRequest fruitObj : mRankRequestListAll) {
+                    add(fruitObj);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    };
+
 }

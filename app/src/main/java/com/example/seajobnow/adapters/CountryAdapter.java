@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.example.seajobnow.ApiEntity.request.CityRequest;
 import com.example.seajobnow.ApiEntity.request.CountryRequest;
 import com.example.seajobnow.R;
 
@@ -19,14 +22,16 @@ public class CountryAdapter extends ArrayAdapter<CountryRequest> {
     private final Context mContext;
     private final List<CountryRequest> mCountryRequests;
     private final List<CountryRequest> mCountryRequestsListAll;
+    private List<CountryRequest> mCountryRequestsSuggestion;
     private final int mLayoutResourceId;
 
     public CountryAdapter(Context context, int resource, List<CountryRequest> stateRequests) {
         super(context, resource, stateRequests);
         this.mContext = context;
         this.mLayoutResourceId = resource;
-        this.mCountryRequests = new ArrayList<>(stateRequests);
+        this.mCountryRequests = stateRequests;
         this.mCountryRequestsListAll = new ArrayList<>(stateRequests);
+        this.mCountryRequestsSuggestion = new ArrayList<>();
     }
 
     public int getCount() {
@@ -57,47 +62,52 @@ public class CountryAdapter extends ArrayAdapter<CountryRequest> {
         return convertView;
     }
 
+    @NonNull
     @Override
     public Filter getFilter() {
-        return new Filter() {
-            @Override
-            public String convertResultToString(Object resultValue) {
-                return ((CountryRequest) resultValue).getCountryName();
-            }
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                List<CountryRequest> stateRequestSuggestion = new ArrayList<>();
-                if (constraint != null) {
-                    for (CountryRequest countryRequest : mCountryRequestsListAll) {
-                        if (countryRequest.getCountryName().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
-                            stateRequestSuggestion.add(countryRequest);
-                        }
-                    }
-                    filterResults.values = stateRequestSuggestion;
-                    filterResults.count = stateRequestSuggestion.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mCountryRequests.clear();
-                if (results != null && results.count > 0) {
-                    // avoids unchecked cast warning when using mDepartments.addAll((ArrayList<Department>) results.values);
-                    for (Object object : (List<?>) results.values) {
-                        if (object instanceof CountryRequest) {
-                            mCountryRequests.add((CountryRequest) object);
-                        }
-                    }
-                    notifyDataSetChanged();
-                } else if (constraint == null) {
-                    // no filter, add entire original list back in
-                    mCountryRequests.addAll(mCountryRequestsListAll);
-                    notifyDataSetInvalidated();
-                }
-            }
-        };
+        return countryFilter;
     }
+
+    private Filter countryFilter = new Filter() {
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            CountryRequest countryRequest = (CountryRequest) resultValue;
+            return countryRequest.getCountryName();
+        }
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            if (charSequence != null) {
+                mCountryRequestsSuggestion.clear();
+                for (CountryRequest countryRequest : mCountryRequestsListAll) {
+                    if (countryRequest.getCountryName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
+                        mCountryRequestsSuggestion.add(countryRequest);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mCountryRequestsSuggestion;
+                filterResults.count = mCountryRequestsSuggestion.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            ArrayList<CountryRequest> tempValues = (ArrayList<CountryRequest>) filterResults.values;
+            if (filterResults != null && filterResults.count > 0) {
+                clear();
+                for (CountryRequest countryobj : tempValues) {
+                    add(countryobj);
+                }
+                notifyDataSetChanged();
+            } else {
+                clear();
+                for (CountryRequest countryobj : mCountryRequestsListAll) {
+                    add(countryobj);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    };
 }

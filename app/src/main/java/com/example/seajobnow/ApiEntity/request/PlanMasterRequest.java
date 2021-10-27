@@ -3,7 +3,7 @@ package com.example.seajobnow.ApiEntity.request;
 public class PlanMasterRequest {
 
     String plan_name;
-    String trial_status;
+    String trial_cv;
     String trial_days;
     String annual_fees;
     String plan_duration;
@@ -13,29 +13,32 @@ public class PlanMasterRequest {
     String smart_filtered_status;
     String download_days;
     String sub_account_user;
-    String whatsapp_alert;
-    String email_alert;
-    String sms_alert;
-    String relationship_manager;
-    String visit_per_month; //Service Visit
-    String mobile_app_access;
-    String urgent_vacancy;
-    String bmti_candidate;
+    boolean whatsapp_alert;
+    boolean email_alert;
+    boolean sms_alert;
+    boolean relationship_manager;
+    boolean visit_per_month; //Service Visit
+    boolean mobile_app_access;
+    boolean urgent_vacancy;
+    boolean bmti_candidate;
     int viewColor;
+    boolean bestOffer;
 
-    public PlanMasterRequest(String plan_name, String plan_duration, int viewColor) {
+   /* public PlanMasterRequest(String plan_name, String plan_duration, int viewColor,boolean bestOffer) {
         this.plan_name = plan_name;
         this.plan_duration = plan_duration;
         this.viewColor = viewColor;
-    }
+        this.bestOffer = bestOffer;
+    }*/
 
-    public PlanMasterRequest(String plan_name, String trial_status, String trial_days, String annual_fees, String plan_duration,
-                             String cv_download_count, String cv_download_type, String unfiltered_per_week,
-                             String smart_filtered_status, String download_days, String sub_account_user,
-                             String whatsapp_alert, String email_alert, String sms_alert, String relationship_manager,
-                             String visit_per_month, String mobile_app_access, String urgent_vacancy, String bmti_candidate) {
+    public PlanMasterRequest(String plan_name, String trial_cv, String trial_days, String annual_fees,
+                             String plan_duration, String cv_download_count, String cv_download_type,
+                             String unfiltered_per_week, String smart_filtered_status, String download_days,
+                             String sub_account_user, boolean whatsapp_alert, boolean email_alert, boolean sms_alert,
+                             boolean relationship_manager, boolean visit_per_month, boolean mobile_app_access,
+                             boolean urgent_vacancy, boolean bmti_candidate, int viewColor, boolean bestOffer) {
         this.plan_name = plan_name;
-        this.trial_status = trial_status;
+        this.trial_cv = trial_cv;
         this.trial_days = trial_days;
         this.annual_fees = annual_fees;
         this.plan_duration = plan_duration;
@@ -53,6 +56,16 @@ public class PlanMasterRequest {
         this.mobile_app_access = mobile_app_access;
         this.urgent_vacancy = urgent_vacancy;
         this.bmti_candidate = bmti_candidate;
+        this.viewColor = viewColor;
+        this.bestOffer = bestOffer;
+    }
+
+    public boolean getBestOffer() {
+        return bestOffer;
+    }
+
+    public void setBestOffer(boolean bestOffer) {
+        this.bestOffer = bestOffer;
     }
 
     public int getViewColor() {
@@ -71,12 +84,12 @@ public class PlanMasterRequest {
         this.plan_name = plan_name;
     }
 
-    public String getTrial_status() {
-        return trial_status;
+    public String getTrial_cv() {
+        return trial_cv;
     }
 
-    public void setTrial_status(String trial_status) {
-        this.trial_status = trial_status;
+    public void setTrial_cv(String trial_status) {
+        this.trial_cv = trial_status;
     }
 
     public String getTrial_days() {
@@ -151,67 +164,71 @@ public class PlanMasterRequest {
         this.sub_account_user = sub_account_user;
     }
 
-    public String getWhatsapp_alert() {
+    public boolean isWhatsapp_alert() {
         return whatsapp_alert;
     }
 
-    public void setWhatsapp_alert(String whatsapp_alert) {
+    public void setWhatsapp_alert(boolean whatsapp_alert) {
         this.whatsapp_alert = whatsapp_alert;
     }
 
-    public String getEmail_alert() {
+    public boolean isEmail_alert() {
         return email_alert;
     }
 
-    public void setEmail_alert(String email_alert) {
+    public void setEmail_alert(boolean email_alert) {
         this.email_alert = email_alert;
     }
 
-    public String getSms_alert() {
+    public boolean isSms_alert() {
         return sms_alert;
     }
 
-    public void setSms_alert(String sms_alert) {
+    public void setSms_alert(boolean sms_alert) {
         this.sms_alert = sms_alert;
     }
 
-    public String getRelationship_manager() {
+    public boolean isRelationship_manager() {
         return relationship_manager;
     }
 
-    public void setRelationship_manager(String relationship_manager) {
+    public void setRelationship_manager(boolean relationship_manager) {
         this.relationship_manager = relationship_manager;
     }
 
-    public String getVisit_per_month() {
+    public boolean isVisit_per_month() {
         return visit_per_month;
     }
 
-    public void setVisit_per_month(String visit_per_month) {
+    public void setVisit_per_month(boolean visit_per_month) {
         this.visit_per_month = visit_per_month;
     }
 
-    public String getMobile_app_access() {
+    public boolean isMobile_app_access() {
         return mobile_app_access;
     }
 
-    public void setMobile_app_access(String mobile_app_access) {
+    public void setMobile_app_access(boolean mobile_app_access) {
         this.mobile_app_access = mobile_app_access;
     }
 
-    public String getUrgent_vacancy() {
+    public boolean isUrgent_vacancy() {
         return urgent_vacancy;
     }
 
-    public void setUrgent_vacancy(String urgent_vacancy) {
+    public void setUrgent_vacancy(boolean urgent_vacancy) {
         this.urgent_vacancy = urgent_vacancy;
     }
 
-    public String getBmti_candidate() {
+    public boolean isBmti_candidate() {
         return bmti_candidate;
     }
 
-    public void setBmti_candidate(String bmti_candidate) {
+    public void setBmti_candidate(boolean bmti_candidate) {
         this.bmti_candidate = bmti_candidate;
+    }
+
+    public boolean isBestOffer() {
+        return bestOffer;
     }
 }

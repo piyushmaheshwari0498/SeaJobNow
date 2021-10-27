@@ -30,7 +30,7 @@ public class MyPlans extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = MyPlansFragmentBinding.inflate(inflater, container, false);
         appSharedPreference = AppSharedPreference.getAppSharedPreference(getContext());
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(appSharedPreference.getString(Constants.INTENT_KEYS.KEY_COMPANY_NAME));
+
 
         binding.btnUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override

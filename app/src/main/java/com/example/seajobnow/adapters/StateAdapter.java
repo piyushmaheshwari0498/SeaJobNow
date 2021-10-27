@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import com.example.seajobnow.ApiEntity.request.CityRequest;
 import com.example.seajobnow.ApiEntity.request.StateRequest;
 import com.example.seajobnow.R;
 
@@ -18,14 +22,16 @@ public class StateAdapter extends ArrayAdapter<StateRequest> {
     private final Context mContext;
     private final List<StateRequest> mStateRequests;
     private final List<StateRequest> mStateRequestListAll;
+    private List<StateRequest> mStateRequestListSuggestion;
     private final int mLayoutResourceId;
 
     public StateAdapter(Context context, int resource, List<StateRequest> stateRequests) {
         super(context, resource, stateRequests);
         this.mContext = context;
         this.mLayoutResourceId = resource;
-        this.mStateRequests = new ArrayList<>(stateRequests);
+        this.mStateRequests = stateRequests;
         this.mStateRequestListAll = new ArrayList<>(stateRequests);
+        this.mStateRequestListSuggestion = new ArrayList<>();
     }
 
     public int getCount() {
@@ -56,47 +62,52 @@ public class StateAdapter extends ArrayAdapter<StateRequest> {
         return convertView;
     }
 
+    @NonNull
     @Override
     public Filter getFilter() {
-        return new Filter() {
-            @Override
-            public String convertResultToString(Object resultValue) {
-                return ((StateRequest) resultValue).getStateName();
-            }
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                List<StateRequest> stateRequestSuggestion = new ArrayList<>();
-                if (constraint != null) {
-                    for (StateRequest stateRequest : mStateRequestListAll) {
-                        if (stateRequest.getStateName().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
-                            stateRequestSuggestion.add(stateRequest);
-                        }
-                    }
-                    filterResults.values = stateRequestSuggestion;
-                    filterResults.count = stateRequestSuggestion.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mStateRequests.clear();
-                if (results != null && results.count > 0) {
-                    // avoids unchecked cast warning when using mDepartments.addAll((ArrayList<Department>) results.values);
-                    for (Object object : (List<?>) results.values) {
-                        if (object instanceof StateRequest) {
-                            mStateRequests.add((StateRequest) object);
-                        }
-                    }
-                    notifyDataSetChanged();
-                } else if (constraint == null) {
-                    // no filter, add entire original list back in
-                    mStateRequests.addAll(mStateRequestListAll);
-                    notifyDataSetInvalidated();
-                }
-            }
-        };
+        return stateFilter;
     }
+
+    private Filter stateFilter = new Filter() {
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            StateRequest stateRequest = (StateRequest) resultValue;
+            return stateRequest.getStateName();
+        }
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            if (charSequence != null) {
+                mStateRequestListSuggestion.clear();
+                for (StateRequest stateRequest : mStateRequestListAll) {
+                    if (stateRequest.getStateName().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
+                        mStateRequestListSuggestion.add(stateRequest);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mStateRequestListSuggestion;
+                filterResults.count = mStateRequestListSuggestion.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            ArrayList<StateRequest> tempValues = (ArrayList<StateRequest>) filterResults.values;
+            if (filterResults != null && filterResults.count > 0) {
+                clear();
+                for (StateRequest stateObj : tempValues) {
+                    add(stateObj);
+                }
+                notifyDataSetChanged();
+            } else {
+                clear();
+                for (StateRequest stateObj : mStateRequestListAll) {
+                    add(stateObj);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    };
 }

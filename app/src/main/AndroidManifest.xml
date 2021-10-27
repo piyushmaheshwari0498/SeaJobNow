@@ -20,7 +20,8 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.plans.UpgradePlanActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.SeaJobNow.NoActionBar" />
         <activity
             android:name=".activity.ForgotPasswordActivity"
             android:exported="false"
