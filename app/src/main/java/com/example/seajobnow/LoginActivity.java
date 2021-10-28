@@ -102,7 +102,15 @@ public class LoginActivity extends AppCompatActivity {
                     if (!validateCompanyCode() | !validatePassword()) {
                         return;
                     }
-                    checkLoginDetails();
+//                    checkLoginDetails();
+                    appSharedPreference.putStringValue(Constants.INTENT_KEYS.KEY_COMPANY_ID, "1");
+                    appSharedPreference.putStringValue(Constants.INTENT_KEYS.KEY_COMPANY_CODE, "SJNAK0001");
+                    appSharedPreference.putStringValue(Constants.INTENT_KEYS.KEY_COMPANY_NAME, "Sea Job Now");
+                    appSharedPreference.putBooleanValue(Constants.IS_LOGGED_IN, true);
+
+                    Intent mIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mIntent);
                 }
             }
         });

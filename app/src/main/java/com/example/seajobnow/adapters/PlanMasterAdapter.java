@@ -3,6 +3,7 @@ package com.example.seajobnow.adapters;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +59,8 @@ public class PlanMasterAdapter extends RecyclerView.Adapter<PlanMasterAdapter.My
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(MyView holder, int position) {
+
+        // This code is used to get the screen dimensions of the user's device
 
         // Set the text of each item of
         // Recycler view with the list items

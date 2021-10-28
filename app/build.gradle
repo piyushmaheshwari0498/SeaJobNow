@@ -66,4 +66,7 @@ dependencies {
     //OTP View
     implementation 'com.github.aabhasr1:OtpView:v1.1.2'
 
+    //Recyclerview carousel Effect
+    implementation 'com.azoft.carousellayoutmanager:carousel:1.2.4'
+
 }

@@ -10,15 +10,20 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.azoft.carousellayoutmanager.CarouselLayoutManager;
+import com.azoft.carousellayoutmanager.CarouselZoomPostLayoutListener;
+import com.azoft.carousellayoutmanager.CenterScrollListener;
 import com.example.seajobnow.ApiEntity.request.PlanMasterRequest;
 import com.example.seajobnow.R;
 import com.example.seajobnow.adapters.HomePostAdapter;
@@ -26,6 +31,8 @@ import com.example.seajobnow.adapters.PlanMasterAdapter;
 import com.example.seajobnow.databinding.ActivityLoginBinding;
 import com.example.seajobnow.databinding.ActivityUpgradePlanBinding;
 import com.example.seajobnow.model.HomePost;
+import com.example.seajobnow.utils.CenterZoomLayoutManager;
+import com.example.seajobnow.utils.CustomZoomLayoutManager;
 
 import java.util.ArrayList;
 
@@ -34,7 +41,7 @@ public class UpgradePlanActivity extends AppCompatActivity {
     // Linear Layout Manager
     LinearLayoutManager HorizontalLayout;
     // Layout Manager
-    RecyclerView.LayoutManager RecyclerViewLayoutManager;
+    CustomZoomLayoutManager RecyclerViewLayoutManager;
     ActivityUpgradePlanBinding binding;
 
     ArrayList<PlanMasterRequest> source;
@@ -53,20 +60,33 @@ public class UpgradePlanActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
-        RecyclerViewLayoutManager = new LinearLayoutManager(this);
         // Set LayoutManager on Recycler View
-        binding.rvPlans.setLayoutManager(RecyclerViewLayoutManager);
+//        RecyclerViewLayoutManager = new CustomZoomLayoutManager(this);
+//        binding.rvPlans.setLayoutManager(RecyclerViewLayoutManager);
+
 
         // Set Horizontal Layout Manager
         // for Recycler view
-//        HorizontalLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+       /* HorizontalLayout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 //        binding.rvPlans.setLayoutManager(HorizontalLayout);
+        int displayWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+        binding.parentLayout.getLayoutParams().width = displayWidth - dpToPx(2) * 4;
+        SnapHelper snapHelper = new PagerSnapHelper();
+        binding.rvPlans.setLayoutManager(HorizontalLayout);
+        snapHelper.attachToRecyclerView(binding.rvPlans);*/
         // Set adapter on recycler view
         AddItemsToRecyclerViewArrayList();
         // calling constructor of adapter
         // with source list as a parameter
+        CarouselLayoutManager layoutManager = new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL, true);
+        layoutManager.setPostLayoutListener(new CarouselZoomPostLayoutListener());
+
+        binding.rvPlans.setLayoutManager(layoutManager);
+        binding.rvPlans.setHasFixedSize(true);
+
         adapter = new PlanMasterAdapter(this,source);
         binding.rvPlans.setAdapter(adapter);
+        binding.rvPlans.addOnScrollListener(new CenterScrollListener());
 //        smoothScroller.setTargetPosition(1);
 //        HorizontalLayout.startSmoothScroll(smoothScroller);
 //        SnapHelper snapHelper = new PagerSnapHelper();
@@ -75,6 +95,10 @@ public class UpgradePlanActivity extends AppCompatActivity {
 //        autoScroll();
 
 
+    }
+
+    public static int dpToPx(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
     }
 
     public void autoScroll(){

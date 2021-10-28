@@ -110,4 +110,15 @@ public class PatternClass {
         System.out.println(email.replaceAll("(^[^@]{3}|(?!^)\\G)[^@]", "$1*"));
         return email;
     }
+
+    public static String capitalizeWord(String str){
+        String words[]=str.split("\\s");
+        String capitalizeWord="";
+        for(String w:words){
+            String first=w.substring(0,1);
+            String afterfirst=w.substring(1);
+            capitalizeWord+=first.toUpperCase()+afterfirst+" ";
+        }
+        return capitalizeWord.trim();
+    }
 }

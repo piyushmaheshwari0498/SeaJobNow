@@ -3,17 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/alice_blue"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:background="@color/alice_blue">
+    >
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_post"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:id="@+id/nested_post">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,19 +34,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 -->
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_plans"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fitsSystemWindows="true"
-                        android:overScrollMode="never"
-                        android:scrollIndicators="none"
-                        android:scrollbarSize="0dp"
-                        android:scrollbars="vertical"
-                        tools:targetApi="m" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_plans"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:fitsSystemWindows="true"
+                    android:overScrollMode="never"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:scrollIndicators="none"
+                    android:scrollbarSize="0dp"
+                    android:scrollbars="horizontal"
+                    tools:targetApi="m" />
 
 
-               <!-- </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+                <!-- </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
             </LinearLayout>
 
             <LinearLayout
@@ -60,8 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
-                    android:scaleType="fitCenter"
-                    />
+                    android:scaleType="fitCenter" />
 
                 <TextView
                     android:id="@+id/no_data_text"

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.seajobnow.session.AppSharedPreference;
 import com.example.seajobnow.utils.Constants;
+import com.example.seajobnow.utils.PatternClass;
 
 public class HomeViewModel extends ViewModel {
 
@@ -16,7 +17,9 @@ public class HomeViewModel extends ViewModel {
     public HomeViewModel() {
         appSharedPreference = AppSharedPreference.getAppSharedPreference(new HomeFragment().getContext());
         mText = new MutableLiveData<>();
-        mText.setValue("Welcome,\n"+ appSharedPreference.getString(Constants.INTENT_KEYS.KEY_COMPANY_NAME));
+        String name  = "sea job now";
+        String companyName = PatternClass.capitalizeWord(name);
+        mText.setValue("Welcome,\n"+ companyName);
     }
 
     public LiveData<String> getText() {
